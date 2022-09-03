@@ -29,7 +29,6 @@ class _IRDatePickerState extends State<IRDatePicker> {
 
   int _selectedYear = 1400;
   int _selectedMonth = 1;
-  late int _currentMonthLength;
   int _selectedDay = 1;
 
   List<int> _years = [];
@@ -48,8 +47,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
     _selectedMonth = _initialDate.month;
     _selectedDay = _initialDate.day;
     _years = generateYearsList(widget.startYear ?? (_initialDate.year - 50), widget.endYear ?? (_initialDate.year + 50));
-    _currentMonthLength = getSelectedJalaliDate().monthLength;
-    _days = generateDaysList(_currentMonthLength);
+    _days = generateDaysList(getSelectedJalaliDate().monthLength);
   }
 
   @override
@@ -75,17 +73,14 @@ class _IRDatePickerState extends State<IRDatePicker> {
           list: _years,
           initialItem: _years.indexOf(_selectedYear),
           onSelectedItemChanged: (selectedIndex) {
-            _selectedYear = _years[selectedIndex];
-            int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
-            if (monthLength != _currentMonthLength) {
-              setState(() {
-                _currentMonthLength = monthLength;
-                mPrint("monthLength changed to $_currentMonthLength");
-                _days = List<int>.generate(_currentMonthLength, (index) => index + 1);
-              });
-            } else {
-              _days = List<int>.generate(_currentMonthLength, (index) => index + 1);
-            }
+            setState(() {
+              _selectedYear = _years[selectedIndex];
+              int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
+              _days = List<int>.generate(monthLength, (index) => index + 1);
+              if (_selectedDay > monthLength) {
+                _selectedDay = monthLength;
+              }
+            });
           },
         ),
         generateCupertinoPicker(
@@ -93,17 +88,14 @@ class _IRDatePickerState extends State<IRDatePicker> {
           list: _months,
           initialItem: _months.indexOf(getMonthName(monthNumber: _selectedMonth)),
           onSelectedItemChanged: (selectedIndex) {
-            _selectedMonth = getMonthNumber(monthName: _months[selectedIndex]);
-            int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
-            if (monthLength != _currentMonthLength) {
-              setState(() {
-                _currentMonthLength = monthLength;
-                mPrint("monthLength changed to $_currentMonthLength");
-                _days = List<int>.generate(_currentMonthLength, (index) => index + 1);
-              });
-            } else {
-              _days = List<int>.generate(_currentMonthLength, (index) => index + 1);
-            }
+            setState(() {
+              _selectedMonth = getMonthNumber(monthName: _months[selectedIndex]);
+              int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
+              _days = List<int>.generate(monthLength, (index) => index + 1);
+              if (_selectedDay > monthLength) {
+                _selectedDay = monthLength;
+              }
+            });
           },
         ),
         generateCupertinoPicker(

@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 Jalali? datePicked = await showIRDatePickerRoute(context);
                 if (datePicked != null) {
                   setState(() {
-                    _date = "${datePicked.year}/${datePicked.month}/${datePicked.month}";
+                    _date = "${datePicked.year}/${datePicked.month}/${datePicked.day}";
                   });
                 }
               },
