@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ir_datetime_picker/src/utils/responsive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-import 'utils.dart';
+import 'utils/utils.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +56,13 @@ class _IRDatePickerState extends State<IRDatePicker> {
         Navigator.pop<Jalali?>(context, null);
       },
     );
-    Widget title = Text("انتخاب تاریخ", style: Theme.of(context).textTheme.titleLarge);
+    Widget title = Text(
+      "انتخاب تاریخ",
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontSize: getResponsiveFontSize(context, 20),
+            fontWeight: FontWeight.w700,
+          ),
+    );
     Widget datePicker = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -107,7 +113,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
       ],
     );
     Widget submitButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.w, height: 6.0.h),
+      constraints: BoxConstraints.tightFor(width: getPercentOfWidth(context, 50.0), height: getPercentOfHeight(context, 6.0)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColor,
@@ -115,7 +121,10 @@ class _IRDatePickerState extends State<IRDatePicker> {
           shadowColor: Colors.black38,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
-        child: Text("تایید", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
+        child: Text(
+          "تایید",
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: getResponsiveFontSize(context, 14.0), fontWeight: FontWeight.w600, color: Colors.white),
+        ),
         onPressed: () {
           Navigator.pop<Jalali?>(context, getSelectedJalaliDate());
         },
@@ -132,13 +141,13 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 alignment: Alignment.topRight,
                 child: backButton,
               ),
-              SizedBox(height: 2.0.h),
+              SizedBox(height: getPercentOfHeight(context, 2.0)),
               title,
-              SizedBox(height: 10.0.h),
+              SizedBox(height: getPercentOfHeight(context, 10.0)),
               datePicker,
               const Spacer(),
               submitButton,
-              SizedBox(height: 6.0.h),
+              SizedBox(height: getPercentOfHeight(context, 6.0)),
             ],
           ),
         ),
@@ -148,11 +157,11 @@ class _IRDatePickerState extends State<IRDatePicker> {
 
   Widget generateCupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     return SizedBox(
-      width: 30.0.w,
-      height: 30.0.h,
+      width: getPercentOfWidth(context, 30.0),
+      height: getPercentOfHeight(context, 30.0),
       child: CupertinoPicker(
         scrollController: FixedExtentScrollController(initialItem: initialItem),
-        itemExtent: 8.5.w,
+        itemExtent: getPercentOfWidth(context, 8.5),
         diameterRatio: 1.0,
         selectionOverlay: Container(
           decoration: BoxDecoration(
@@ -165,7 +174,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
         onSelectedItemChanged: onSelectedItemChanged,
         children: list.map<Widget>((element) {
           return Center(
-            child: Text(element.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.sp)),
+            child: Text(element.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: getResponsiveFontSize(context, 18.0))),
           );
         }).toList(),
       ),

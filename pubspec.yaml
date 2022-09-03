@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  responsive_sizer: ^3.1.0
   shamsi_date: ^1.0.1
 
 dev_dependencies:
