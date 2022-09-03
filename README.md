@@ -1,39 +1,43 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Iranian (persian,farsi,shamsi,jalali) datetime picker for flutter with cupertino style.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+[![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
+[![Generic badge](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Step1: add dependency to your pubspec.yaml:
 
-```dart
-const like = 'sample';
+```yaml
+
+dependencies:
+  ir_datetime_picker: version
+
 ```
 
-## Additional information
+Step2: import library:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+
+import 'package:ir_datetime_picker.dart/ir_datetime_picker.dart';
+
+```
+
+Step3: check exmaples to use:
+
+```dart
+////
+ElevatedButton(
+     child: const Text("PickDate"),
+     onPressed: () async {
+       Jalali? selectedDate = await showIRDatePickerRoute(context);
+       if (selectedDate != null) {
+         print("${selectedDate.year}/${selectedDate.month}/${selectedDate.day}");
+       } else {
+         print("No date was selected");
+       }
+     },
+)
+////
+```
