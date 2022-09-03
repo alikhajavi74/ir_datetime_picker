@@ -10,3 +10,7 @@
 
 * Add IRDateTimePicker
 * Optimization and resolve some bugs
+
+## 1.0.1
+
+* Update README.md
