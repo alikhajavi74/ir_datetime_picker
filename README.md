@@ -2,7 +2,7 @@
 
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
-[![Generic badge](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
+[![Generic badge](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)]
 
 
 ## Usage
@@ -27,7 +27,9 @@ import 'package:ir_datetime_picker.dart/ir_datetime_picker.dart';
 Step3: check exmaples to use:
 
 ```dart
-////
+
+// use top level function showIRDatePickerRoute like below:
+
 ElevatedButton(
      child: const Text("PickDate"),
      onPressed: () async {
@@ -39,5 +41,5 @@ ElevatedButton(
        }
      },
 )
-////
+
 ```
