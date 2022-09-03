@@ -1,38 +1,33 @@
 # Iranian date & time picker
 
-Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and responsive ui.
+Iranian (persian, farsi, shamsi, jalali) datetime picker with cupertino style and responsive ui.
 
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
 ## Screen:
-![Demo Screen](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo_screen.png)
+![Demo Screen](readme_assets/demo_screen.png)
 
 
 ## Usage
 
 Step1: add dependency to your pubspec.yaml:
 
-```yaml
-
+```
 dependencies:
   ir_datetime_picker: version
-
 ```
 
 Step2: import library:
 
-```dart
-
+```
 import 'package:ir_datetime_picker/ir_datetime_picker.dart';
-
 ```
 
 Step3: check exmaples to use:
 
-```dart
-
+```
 // use top level function showIRDatePickerRoute like below:
 
 ElevatedButton(
@@ -46,7 +41,6 @@ ElevatedButton(
     }
   },
 )
-
 ```
 
 ## ContactMe
