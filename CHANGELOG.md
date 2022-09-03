@@ -18,3 +18,8 @@
 ## 1.0.2
 
 * Update README.md
+
+## 1.1.0
+
+* Add example project
+* Make responsive IRDatePicker

@@ -6,6 +6,9 @@ Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and r
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
+## Screen:
+[Demo Screen](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
+
 
 ## Usage
 
