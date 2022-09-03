@@ -2,7 +2,7 @@
 
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
-[![Generic badge](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)]
+![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
 
 ## Usage
