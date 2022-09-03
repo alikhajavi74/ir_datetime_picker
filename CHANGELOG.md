@@ -23,3 +23,7 @@
 
 * Add example project
 * Make responsive IRDatePicker
+
+## 1.1.1
+
+* Resolve some bugs
