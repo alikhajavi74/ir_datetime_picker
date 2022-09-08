@@ -1,3 +1,5 @@
+// Some utilities for project
+
 import 'package:flutter/foundation.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -11,7 +13,6 @@ const List<String> persianMonths = ["فروردین", "اردیبهشت", "خر�
 
 // TopFunctions:
 
-// getMonthName:
 String getMonthName({required int monthNumber}) {
   switch (monthNumber) {
     case 1:
@@ -43,7 +44,6 @@ String getMonthName({required int monthNumber}) {
   }
 }
 
-// getMonthNumber:
 int getMonthNumber({required String monthName}) {
   switch (monthName) {
     case "فروردین":
@@ -75,7 +75,6 @@ int getMonthNumber({required String monthName}) {
   }
 }
 
-// getWeekDayName:
 String getWeekDayName({required int weekDayNumber}) {
   switch (weekDayNumber) {
     case 1:
@@ -97,7 +96,6 @@ String getWeekDayName({required int weekDayNumber}) {
   }
 }
 
-// getWeekDayNumber:
 int getWeekDayNumber({required String weekDayName}) {
   switch (weekDayName) {
     case "شنبه":
@@ -127,12 +125,10 @@ int getWeekDayNumber({required String weekDayName}) {
   }
 }
 
-// getMonthLength:
 int getMonthLength({required int year, required int month}) {
   return Jalali(year, month).monthLength;
 }
 
-// mPrint
 void mPrint(Object object) {
   if (kDebugMode) {
     print(object);

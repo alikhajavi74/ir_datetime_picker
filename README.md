@@ -7,7 +7,7 @@ Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and r
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
 ## Screen:
-![Demo Screen](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo_screen.png)
+![Demo Screen](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/screens/dialog_screen.png)
 
 
 ## Usage
@@ -33,19 +33,42 @@ Step3: check exmaples to use:
 
 ```dart
 
-// use top level function showIRDatePickerRoute like below:
-
+// case1: use top level function showIRDatePickerDialog:
 ElevatedButton(
-  child: const Text("PickDate"),
-  onPressed: () async {
-    Jalali? datePicked = await showIRDatePickerRoute(context);
-    if (datePicked != null) {
-      setState(() {
-        _date = "${datePicked.year}/${datePicked.month}/${datePicked.month}";
-      });
-    }
-  },
-)
+     child: const Text("pick date with dialog"),
+     onPressed: () async {
+       Jalali? selectedDate = await showIRDatePickerDialog(context);
+       if (selectedDate != null) {
+         setState(() {
+           _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+         });
+       }
+     },
+   )
+
+
+// case2: use top level function showIRDatePickerRoute:
+ElevatedButton(
+     child: const Text("pick date with route"),
+     onPressed: () async {
+       Jalali? selectedDate = await showIRDatePickerRoute(context);
+       if (selectedDate != null) {
+         setState(() {
+           _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+         });
+       }
+     },
+   )
+
+
+// case3: custom use:
+IRDatePicker(
+     onSelected: (Jalali selectedDate) {
+       setState(() {
+         _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+       });
+     },
+   )
 
 ```
 

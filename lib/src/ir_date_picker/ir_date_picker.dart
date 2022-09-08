@@ -1,30 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/utils/responsive.dart';
+import 'package:ir_datetime_picker/src/utils/utils.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-import 'utils/utils.dart';
-
-// --------------------------------------------------------------------------------------------------------------------
-
-// IRDatePicker widget:
+typedef IRDatePickerOnSelected = void Function(Jalali jalaliDate);
 
 class IRDatePicker extends StatefulWidget {
   final Jalali? initialDate;
   final int? startYear;
   final int? endYear;
-  final String? title;
-  final Widget? backButtonIcon;
-  final Widget? submitButton;
+  final IRDatePickerOnSelected onSelected;
 
   const IRDatePicker({
     Key? key,
     this.initialDate,
     this.startYear,
     this.endYear,
-    this.title,
-    this.backButtonIcon,
-    this.submitButton,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -59,21 +52,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    Widget backButton = IconButton(
-      icon: widget.backButtonIcon ?? const Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop<Jalali?>(context, null);
-      },
-    );
-    Widget title = Text(
-      widget.title ?? "انتخاب تاریخ",
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontSize: 20.0.rf(context),
-            fontWeight: FontWeight.w700,
-          ),
-    );
-    Widget datePicker = Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         generateCupertinoPicker(
@@ -89,6 +68,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 _selectedDay = monthLength;
               }
             });
+            widget.onSelected(getSelectedJalaliDate());
           },
         ),
         generateCupertinoPicker(
@@ -104,6 +84,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 _selectedDay = monthLength;
               }
             });
+            widget.onSelected(getSelectedJalaliDate());
           },
         ),
         generateCupertinoPicker(
@@ -112,51 +93,10 @@ class _IRDatePickerState extends State<IRDatePicker> {
           initialItem: _days.indexOf(_selectedDay),
           onSelectedItemChanged: (selectedIndex) {
             _selectedDay = _days[selectedIndex];
+            widget.onSelected(getSelectedJalaliDate());
           },
         ),
       ],
-    );
-    Widget submitButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.w(context), height: 6.0.h(context)),
-      child: InkWell(
-        child: Material(
-          color: themeData.primaryColor,
-          elevation: 6.0,
-          shadowColor: Colors.black38,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Center(
-            child: Text(
-              "تایید",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.rf(context), fontWeight: FontWeight.w600, color: Colors.white),
-            ),
-          ),
-        ),
-        onTap: () => Navigator.pop<Jalali?>(context, getSelectedJalaliDate()),
-      ),
-    );
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(width: double.infinity),
-              Align(
-                alignment: Alignment.topRight,
-                child: backButton,
-              ),
-              SizedBox(height: 2.0.h(context)),
-              title,
-              SizedBox(height: 10.0.h(context)),
-              datePicker,
-              const Spacer(),
-              submitButton,
-              SizedBox(height: 6.0.h(context)),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -202,22 +142,3 @@ class _IRDatePickerState extends State<IRDatePicker> {
     return Jalali(_selectedYear, _selectedMonth, _selectedDay);
   }
 }
-
-// --------------------------------------------------------------------------------------------------------------------
-
-// showIRDatePickerRoute top function:
-
-Future<Jalali?> showIRDatePickerRoute(BuildContext context, {Jalali? initialDate, int? startYear, int? endYear}) async {
-  Jalali? jalaliDate = await Navigator.of(context).push<Jalali?>(
-    MaterialPageRoute(
-      builder: (BuildContext buildContext) => IRDatePicker(
-        initialDate: initialDate,
-        startYear: startYear,
-        endYear: endYear,
-      ),
-    ),
-  );
-  return jalaliDate;
-}
-
-// --------------------------------------------------------------------------------------------------------------------

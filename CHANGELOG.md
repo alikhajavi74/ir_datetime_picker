@@ -27,3 +27,9 @@
 ## 1.1.1
 
 * Resolve some bugs
+
+## 2.0.0
+
+* Add IRDatePickerResponsiveDialog and its utils
+* Change example and README.md
+* Resolve some bugs
