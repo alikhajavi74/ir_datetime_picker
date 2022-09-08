@@ -36,16 +36,38 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Date: $_date"),
+            Text("SelectedDate: $_date", style: const TextStyle(fontSize: 18.0)),
+            const SizedBox(height: 10.0),
             ElevatedButton(
-              child: const Text("PickDate"),
+              child: const Text("pick date with dialog"),
               onPressed: () async {
-                Jalali? datePicked = await showIRDatePickerRoute(context);
-                if (datePicked != null) {
+                Jalali? selectedDate = await showIRDatePickerDialog(context);
+                if (selectedDate != null) {
                   setState(() {
-                    _date = "${datePicked.year}/${datePicked.month}/${datePicked.day}";
+                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
+              },
+            ),
+            const SizedBox(height: 10.0),
+            ElevatedButton(
+              child: const Text("pick date with route"),
+              onPressed: () async {
+                Jalali? selectedDate = await showIRDatePickerRoute(context);
+                if (selectedDate != null) {
+                  setState(() {
+                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                  });
+                }
+              },
+            ),
+            const SizedBox(height: 30.0),
+            const Text("or u can use custom:", style: TextStyle(fontSize: 18.0)),
+            IRDatePicker(
+              onSelected: (Jalali selectedDate) {
+                setState(() {
+                  _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                });
               },
             ),
           ],
