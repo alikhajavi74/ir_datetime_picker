@@ -1,6 +1,6 @@
 name: ir_datetime_picker
 description: Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and responsive ui.
-version: 2.0.2
+version: 2.0.3
 repository: https://github.com/alikhajavi74/ir_datetime_picker
 
 environment:

@@ -39,3 +39,7 @@
 * Add TodayButton
 * Change example and README.md
 * Resolve some bugs
+
+## 2.0.3
+
+* Change example and README.md
