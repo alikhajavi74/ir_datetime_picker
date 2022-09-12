@@ -6,8 +6,8 @@ Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and r
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
 
-## Screen:
-![Demo Screen](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/screens/dialog_screen.png)
+## Demo:
+![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/demo.gif)
 
 
 ## Usage
@@ -29,7 +29,7 @@ import 'package:ir_datetime_picker/ir_datetime_picker.dart';
 
 ```
 
-Step3: check exmaples to use:
+Step3: check exmaple to use:
 
 ```dart
 

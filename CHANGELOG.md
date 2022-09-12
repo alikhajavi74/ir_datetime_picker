@@ -33,3 +33,9 @@
 * Add IRDatePickerResponsiveDialog and its utils
 * Change example and README.md
 * Resolve some bugs
+
+## 2.0.2
+
+* Add TodayButton
+* Change example and README.md
+* Resolve some bugs

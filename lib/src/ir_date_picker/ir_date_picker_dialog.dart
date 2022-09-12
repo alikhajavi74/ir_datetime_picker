@@ -12,12 +12,16 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
   final Jalali? initialDate;
   final int? startYear;
   final int? endYear;
+  final bool? enableTodayButton;
+  final String? todayButtonText;
 
   const IRDatePickerResponsiveDialog({
     Key? key,
     this.initialDate,
     this.startYear,
     this.endYear,
+    this.enableTodayButton,
+    this.todayButtonText,
   }) : super(key: key);
 
   @override
@@ -25,7 +29,7 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     Jalali selectedDate = initialDate ?? Jalali.now();
     Widget backButton = IconButton(
-      iconSize: 7.0.w(context),
+      iconSize: 7.0.percentOfWidth(context),
       icon: const Icon(Icons.close),
       onPressed: () {
         Navigator.pop<Jalali?>(context, null);
@@ -34,7 +38,7 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
     Widget title = Text(
       "انتخاب تاریخ",
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontSize: 20.0.rf(context),
+            fontSize: 20.0.responsiveFont(context),
             fontWeight: FontWeight.w700,
           ),
     );
@@ -42,12 +46,14 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
       initialDate: initialDate,
       startYear: startYear,
       endYear: endYear,
+      enableTodayButton: enableTodayButton,
+      todayButtonText: todayButtonText,
       onSelected: (Jalali jalaliDate) {
         selectedDate = jalaliDate;
       },
     );
     Widget submitButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.w(context), height: 6.0.h(context)),
+      constraints: BoxConstraints.tightFor(width: 50.0.percentOfWidth(context), height: 6.0.percentOfHeight(context)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: themeData.primaryColor,
@@ -57,7 +63,7 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
         ),
         child: Text(
           "تایید",
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.rf(context), fontWeight: FontWeight.w600, color: Colors.white),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
         ),
         onPressed: () => Navigator.pop<Jalali?>(context, selectedDate),
       ),
@@ -66,8 +72,8 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: ConstrainedBox(
         constraints: BoxConstraints.tightFor(
-          width: 90.0.w(context),
-          height: 60.0.h(context),
+          width: 90.0.percentOfWidth(context),
+          height: 65.0.percentOfHeight(context),
         ),
         child: Material(
           borderRadius: BorderRadius.circular(15.0),
@@ -83,13 +89,13 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: backButton,
                 ),
-                SizedBox(height: 1.5.h(context)),
+                SizedBox(height: 1.5.percentOfHeight(context)),
                 title,
-                SizedBox(height: 1.5.h(context)),
+                SizedBox(height: 1.5.percentOfHeight(context)),
                 datePicker,
                 const Spacer(),
                 submitButton,
-                SizedBox(height: 2.0.h(context)),
+                SizedBox(height: 2.0.percentOfHeight(context)),
               ],
             ),
           ),
@@ -103,7 +109,7 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
 
 // showIRDatePickerDialog top function:
 
-Future<Jalali?> showIRDatePickerDialog(BuildContext context, {Jalali? initialDate, int? startYear, int? endYear}) async {
+Future<Jalali?> showIRDatePickerDialog(BuildContext context, {Jalali? initialDate, int? startYear, int? endYear, bool? enableTodayButton, String? todayButtonText}) async {
   Jalali? jalaliDate = await showDialog<Jalali?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
@@ -113,6 +119,8 @@ Future<Jalali?> showIRDatePickerDialog(BuildContext context, {Jalali? initialDat
           initialDate: initialDate,
           startYear: startYear,
           endYear: endYear,
+          enableTodayButton: enableTodayButton,
+          todayButtonText: todayButtonText,
         ),
       ),
     ),
