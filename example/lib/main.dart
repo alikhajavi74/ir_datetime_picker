@@ -38,10 +38,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text("SelectedDate: $_date", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 10.0),
+
+            /// Pick date with IRDatePickerResponsiveDialog:
             ElevatedButton(
               child: const Text("pick date with dialog"),
               onPressed: () async {
-                Jalali? selectedDate = await showIRDatePickerDialog(context);
+                Jalali? selectedDate = await showIRDatePickerDialog(context, enableTodayButton: true);
                 if (selectedDate != null) {
                   setState(() {
                     _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
@@ -50,10 +52,12 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const SizedBox(height: 10.0),
+
+            /// Pick date with IRDatePickerResponsiveRoute:
             ElevatedButton(
               child: const Text("pick date with route"),
               onPressed: () async {
-                Jalali? selectedDate = await showIRDatePickerRoute(context);
+                Jalali? selectedDate = await showIRDatePickerRoute(context, enableTodayButton: true);
                 if (selectedDate != null) {
                   setState(() {
                     _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
@@ -62,13 +66,23 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const SizedBox(height: 30.0),
-            const Text("or u can use custom:", style: TextStyle(fontSize: 18.0)),
-            IRDatePicker(
-              onSelected: (Jalali selectedDate) {
-                setState(() {
-                  _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
-                });
-              },
+
+            /// You can create your own date picker with IRDatePicker widget:
+            const Text("use as custom:", style: TextStyle(fontSize: 18.0)),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: IRDatePicker(
+                startYear: 1380,
+                endYear: 1420,
+                initialDate: Jalali(1400, 6, 12),
+                enableTodayButton: true,
+                todayButtonText: "برو به امروز",
+                onSelected: (Jalali selectedDate) {
+                  setState(() {
+                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                  });
+                },
+              ),
             ),
           ],
         ),
