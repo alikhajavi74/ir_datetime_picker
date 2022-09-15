@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ir_datetime_picker/src/utils/responsive.dart';
-import 'package:ir_datetime_picker/src/utils/utils.dart';
+import 'package:ir_datetime_picker/src/helpers/ir_date_helper.dart';
+import 'package:ir_datetime_picker/src/helpers/print.dart';
+import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 typedef IRDatePickerOnSelected = void Function(Jalali jalaliDate);
@@ -37,16 +38,12 @@ class _IRDatePickerState extends State<IRDatePicker> {
   int _selectedDay = 1;
 
   List<int> _years = [];
-  final List<String> _months = persianMonths;
+  final List<String> _months = IRShamsiDateHelper.months;
   List<int> _days = [];
 
   @override
   void initState() {
     super.initState();
-    init();
-  }
-
-  void init() {
     _initialDate = widget.initialDate ?? Jalali.now();
     _refreshCupertinoPickers = false;
     _selectedYear = _initialDate.year;
@@ -61,89 +58,89 @@ class _IRDatePickerState extends State<IRDatePicker> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshCupertinoPickers = false;
     });
+    Widget cupertinoPickers = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        generateCupertinoPicker(
+          context: context,
+          list: _years,
+          initialItem: _years.indexOf(_selectedYear),
+          onSelectedItemChanged: (selectedIndex) {
+            setState(() {
+              _selectedYear = _years[selectedIndex];
+              int monthLength = IRShamsiDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+              _days = List<int>.generate(monthLength, (index) => index + 1);
+              if (_selectedDay > monthLength) {
+                _selectedDay = monthLength;
+              }
+            });
+            widget.onSelected(getSelectedJalaliDate());
+          },
+        ),
+        generateCupertinoPicker(
+          context: context,
+          list: _months,
+          initialItem: _months.indexOf(IRShamsiDateHelper.getMonthName(monthNumber: _selectedMonth)),
+          onSelectedItemChanged: (selectedIndex) {
+            setState(() {
+              _selectedMonth = IRShamsiDateHelper.getMonthNumber(monthName: _months[selectedIndex]);
+              int monthLength = IRShamsiDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+              _days = List<int>.generate(monthLength, (index) => index + 1);
+              if (_selectedDay > monthLength) {
+                _selectedDay = monthLength;
+              }
+            });
+            widget.onSelected(getSelectedJalaliDate());
+          },
+        ),
+        generateCupertinoPicker(
+          context: context,
+          list: _days,
+          initialItem: _days.indexOf(_selectedDay),
+          onSelectedItemChanged: (selectedIndex) {
+            _selectedDay = _days[selectedIndex];
+            widget.onSelected(getSelectedJalaliDate());
+          },
+        ),
+      ],
+    );
+    Widget todayButton = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 1.0.percentOfHeight(context)),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              TextButton.icon(
+                icon: const Icon(Icons.info),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(2.0.percentOfWidth(context)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                ),
+                label: Text(widget.todayButtonText ?? "انتخاب امروز", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
+                onPressed: () {
+                  setState(() {
+                    _refreshCupertinoPickers = true;
+                    Jalali now = Jalali.now();
+                    _selectedYear = now.year;
+                    _selectedMonth = now.month;
+                    _selectedDay = now.day;
+                  });
+                  widget.onSelected(getSelectedJalaliDate());
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            generateCupertinoPicker(
-              context: context,
-              list: _years,
-              initialItem: _years.indexOf(_selectedYear),
-              onSelectedItemChanged: (selectedIndex) {
-                setState(() {
-                  _selectedYear = _years[selectedIndex];
-                  int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
-                  _days = List<int>.generate(monthLength, (index) => index + 1);
-                  if (_selectedDay > monthLength) {
-                    _selectedDay = monthLength;
-                  }
-                });
-                widget.onSelected(getSelectedJalaliDate());
-              },
-            ),
-            generateCupertinoPicker(
-              context: context,
-              list: _months,
-              initialItem: _months.indexOf(getMonthName(monthNumber: _selectedMonth)),
-              onSelectedItemChanged: (selectedIndex) {
-                setState(() {
-                  _selectedMonth = getMonthNumber(monthName: _months[selectedIndex]);
-                  int monthLength = getMonthLength(year: _selectedYear, month: _selectedMonth);
-                  _days = List<int>.generate(monthLength, (index) => index + 1);
-                  if (_selectedDay > monthLength) {
-                    _selectedDay = monthLength;
-                  }
-                });
-                widget.onSelected(getSelectedJalaliDate());
-              },
-            ),
-            generateCupertinoPicker(
-              context: context,
-              list: _days,
-              initialItem: _days.indexOf(_selectedDay),
-              onSelectedItemChanged: (selectedIndex) {
-                _selectedDay = _days[selectedIndex];
-                widget.onSelected(getSelectedJalaliDate());
-              },
-            ),
-          ],
-        ),
-        widget.enableTodayButton ?? true
-            ? Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 1.0.percentOfHeight(context)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        TextButton.icon(
-                          icon: const Icon(Icons.info),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-                          ),
-                          label: Text(widget.todayButtonText ?? "انتخاب امروز", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
-                          onPressed: () {
-                            setState(() {
-                              _refreshCupertinoPickers = true;
-                              Jalali now = Jalali.now();
-                              _selectedYear = now.year;
-                              _selectedMonth = now.month;
-                              _selectedDay = now.day;
-                            });
-                            widget.onSelected(getSelectedJalaliDate());
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-            : const SizedBox.shrink(),
+        cupertinoPickers,
+        (widget.enableTodayButton ?? true) ? todayButton : const SizedBox.shrink(),
       ],
     );
   }

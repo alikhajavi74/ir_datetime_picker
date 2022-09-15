@@ -84,6 +84,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+
+            /// Pick date with showIRTimePickerDialog:
+            ElevatedButton(
+              child: const Text("pick time with dialog"),
+              onPressed: () async {
+                showIRTimePickerDialog(context);
+              },
+            ),
+            const SizedBox(height: 30.0),
           ],
         ),
       ),
