@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
+typedef IRTimePickerOnSelected = void Function(DateTime time);
+
 class IRTimePicker extends StatefulWidget {
-  final int initialTime;
+  final IRTimePickerOnSelected onSelected;
 
   const IRTimePicker({
     Key? key,
-    this.initialTime = 0,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -16,46 +18,53 @@ class IRTimePicker extends StatefulWidget {
 }
 
 class _IRTimePickerState extends State<IRTimePicker> {
-  late int _initialTime;
+  late bool _refreshCupertinoPickers;
+  late List<String> _minutes;
+  late List<String> _hours;
+  late int _selectedMinute;
+  late int _selectedHour;
 
   @override
   void initState() {
     super.initState();
-    _initialTime = widget.initialTime ?? 0;
+    _refreshCupertinoPickers = false;
+    _selectedMinute = DateTime.now().minute;
+    _selectedHour = DateTime.now().hour;
+    _minutes = List.generate(
+      60,
+      (index) => index.toString().padLeft(2, "0"),
+    );
+
+    _hours = List.generate(
+      24,
+      (index) => index.toString().padLeft(2, "0"),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    DateTime.now();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _refreshCupertinoPickers = false;
+    });
     Widget cupertinoPickers = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         generateCupertinoPicker(
           context: context,
-          list: List.generate(
-            60,
-            (index) {
-              return index.toString().padLeft(2, "0");
-            },
-          ),
-          initialItem: 0,
+          list: _minutes,
+          initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
           onSelectedItemChanged: (selectedIndex) {},
         ),
         Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
         generateCupertinoPicker(
           context: context,
-          list: List.generate(
-            24,
-            (index) {
-              return index.toString().padLeft(2, "0");
-            },
-          ),
-          initialItem: 0,
+          list: _hours,
+          initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
           onSelectedItemChanged: (selectedIndex) {},
         ),
       ],
     );
-    Widget todayButton = Column(
+    Widget nowButton = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
@@ -73,7 +82,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 ),
                 label: Text("انتخاب اکنون", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
                 onPressed: () {
-                  // TODO
+                  setState(() {
+                    _refreshCupertinoPickers = true;
+                    _selectedMinute = DateTime.now().minute;
+                    _selectedHour = DateTime.now().hour;
+                  });
                 },
               ),
             ],
@@ -84,7 +97,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
     return Column(
       children: [
         cupertinoPickers,
-        todayButton,
+        nowButton,
       ],
     );
   }
@@ -95,6 +108,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
       width: 30.0.percentOfWidth(context),
       height: 30.0.percentOfHeight(context),
       child: CupertinoPicker(
+        key: _refreshCupertinoPickers ? UniqueKey() : null,
         looping: true,
         scrollController: FixedExtentScrollController(initialItem: initialItem),
         itemExtent: 8.5.percentOfWidth(context),

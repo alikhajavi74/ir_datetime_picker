@@ -28,7 +28,11 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
     );
-    Widget timePicker = const IRTimePicker(initialTime: 0);
+    Widget timePicker = IRTimePicker(
+      onSelected: (time) {
+        // TODO
+      },
+    );
     Widget submitButton = ConstrainedBox(
       constraints: BoxConstraints.tightFor(width: 50.0.percentOfWidth(context), height: 6.0.percentOfHeight(context)),
       child: ElevatedButton(
