@@ -28,6 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _date = "Null";
+  String _time = "Null";
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,11 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text("SelectedDate: $_date", style: const TextStyle(fontSize: 18.0)),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 5.0),
 
             /// Pick date with IRDatePickerResponsiveDialog:
             ElevatedButton(
-              child: const Text("pick date with dialog"),
+              child: const Text("Pick Date"),
               onPressed: () async {
                 Jalali? selectedDate = await showIRDatePickerDialog(context, enableTodayButton: true);
                 if (selectedDate != null) {
@@ -51,48 +52,23 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 30.0),
 
-            /// Pick date with IRDatePickerResponsiveRoute:
+            Text("SelectedTime: $_time", style: const TextStyle(fontSize: 18.0)),
+            const SizedBox(height: 5.0),
+
+            /// Pick time with showIRTimePickerDialog:
             ElevatedButton(
-              child: const Text("pick date with route"),
+              child: const Text("Pick Time"),
               onPressed: () async {
-                Jalali? selectedDate = await showIRDatePickerRoute(context, enableTodayButton: true);
-                if (selectedDate != null) {
+                IRTimeModel? time = await showIRTimePickerDialog(context);
+                if (time != null) {
                   setState(() {
-                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _time = time.toString();
                   });
                 }
               },
             ),
-            const SizedBox(height: 30.0),
-
-            /// You can create your own date picker with IRDatePicker widget:
-            const Text("use as custom:", style: TextStyle(fontSize: 18.0)),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: IRDatePicker(
-                startYear: 1380,
-                endYear: 1420,
-                initialDate: Jalali(1400, 6, 12),
-                enableTodayButton: true,
-                todayButtonText: "برو به امروز",
-                onSelected: (Jalali selectedDate) {
-                  setState(() {
-                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
-                  });
-                },
-              ),
-            ),
-
-            /// Pick date with showIRTimePickerDialog:
-            ElevatedButton(
-              child: const Text("pick time with dialog"),
-              onPressed: () async {
-                showIRTimePickerDialog(context);
-              },
-            ),
-            const SizedBox(height: 30.0),
           ],
         ),
       ),

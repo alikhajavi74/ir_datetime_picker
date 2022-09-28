@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
-typedef IRTimePickerOnSelected = void Function(DateTime time);
+import 'ir_time_model.dart';
+
+typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 
 class IRTimePicker extends StatefulWidget {
   final IRTimePickerOnSelected onSelected;
 
-  const IRTimePicker({
-    Key? key,
-    required this.onSelected,
-  }) : super(key: key);
+  const IRTimePicker({Key? key, required this.onSelected}) : super(key: key);
 
   @override
   State<IRTimePicker> createState() => _IRTimePickerState();
@@ -53,14 +52,20 @@ class _IRTimePickerState extends State<IRTimePicker> {
           context: context,
           list: _minutes,
           initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
-          onSelectedItemChanged: (selectedIndex) {},
+          onSelectedItemChanged: (selectedIndex) {
+            _selectedMinute = int.parse(_minutes[selectedIndex]);
+            widget.onSelected(getSelectedIRtime());
+          },
         ),
         Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
         generateCupertinoPicker(
           context: context,
           list: _hours,
           initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
-          onSelectedItemChanged: (selectedIndex) {},
+          onSelectedItemChanged: (selectedIndex) {
+            _selectedHour = int.parse(_hours[selectedIndex]);
+            widget.onSelected(getSelectedIRtime());
+          },
         ),
       ],
     );
@@ -121,5 +126,9 @@ class _IRTimePickerState extends State<IRTimePicker> {
         }).toList(),
       ),
     );
+  }
+
+  IRTimeModel getSelectedIRtime() {
+    return IRTimeModel(hour: _selectedHour, minute: _selectedMinute);
   }
 }

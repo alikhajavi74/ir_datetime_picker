@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ir_datetime_picker/ir_datetime_picker.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
+
+import 'ir_time_model.dart';
+import 'ir_time_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -14,23 +16,22 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    DateTime now = DateTime.now();
+    IRTimeModel selectedTime = IRTimeModel(hour: now.hour, minute: now.minute);
     Widget backButton = IconButton(
       iconSize: 7.0.percentOfWidth(context),
       icon: const Icon(Icons.close),
       onPressed: () {
-        // TODO
+        Navigator.pop(context, null);
       },
     );
     Widget title = Text(
       "انتخاب زمان",
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontSize: 20.0.responsiveFont(context),
-            fontWeight: FontWeight.w700,
-          ),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
       onSelected: (time) {
-        // TODO
+        selectedTime = time;
       },
     );
     Widget submitButton = ConstrainedBox(
@@ -47,7 +48,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
         ),
         onPressed: () {
-          // TODO
+          Navigator.pop(context, selectedTime);
         },
       ),
     );
@@ -92,8 +93,8 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 // showIRTimePickerDialog top function:
 
-showIRTimePickerDialog(BuildContext context) async {
-  showDialog(
+Future<IRTimeModel?> showIRTimePickerDialog(BuildContext context) async {
+  IRTimeModel? time = await showDialog<IRTimeModel?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.4),
@@ -102,6 +103,7 @@ showIRTimePickerDialog(BuildContext context) async {
       ),
     ),
   );
+  return time;
 }
 
 // --------------------------------------------------------------------------------------------------------------------
