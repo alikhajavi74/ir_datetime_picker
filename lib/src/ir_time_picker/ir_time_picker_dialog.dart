@@ -27,7 +27,8 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
     );
     Widget title = Text(
       "انتخاب زمان",
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
       onSelected: (IRTimeModel time) {
@@ -35,17 +36,23 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
       },
     );
     Widget submitButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.percentOfWidth(context), height: 6.0.percentOfHeight(context)),
+      constraints: BoxConstraints.tightFor(
+          width: 50.0.percentOfWidth(context),
+          height: 6.0.percentOfHeight(context)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: themeData.primaryColor,
           elevation: 6.0,
           shadowColor: Colors.black38,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
           "تایید",
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: 14.0.responsiveFont(context),
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         onPressed: () {
           Navigator.pop(context, selectedTime);

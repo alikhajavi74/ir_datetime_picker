@@ -55,13 +55,18 @@ class _IRTimePickerState extends State<IRTimePicker> {
         generateCupertinoPicker(
           context: context,
           list: _minutes,
-          initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
+          initialItem:
+              _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
           onSelectedItemChanged: (selectedIndex) {
             _selectedMinute = int.parse(_minutes[selectedIndex]);
             widget.onSelected(getSelectedIRtime());
           },
         ),
-        Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
+        Text(" : ",
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontSize: 18.0.responsiveFont(context))),
         generateCupertinoPicker(
           context: context,
           list: _hours,
@@ -78,7 +83,8 @@ class _IRTimePickerState extends State<IRTimePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding:
+              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
@@ -87,9 +93,13 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 icon: const Icon(Icons.info),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text("انتخاب اکنون", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
+                label: Text("انتخاب اکنون",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 14.0.responsiveFont(context))),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -111,7 +121,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
     );
   }
 
-  Widget generateCupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
+  Widget generateCupertinoPicker(
+      {required BuildContext context,
+      required List list,
+      required int initialItem,
+      required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     return SizedBox(
       width: 30.0.percentOfWidth(context),
@@ -125,7 +139,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
         onSelectedItemChanged: onSelectedItemChanged,
         children: list.map<Widget>((element) {
           return Center(
-            child: Text(element.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
+            child: Text(element.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontSize: 18.0.responsiveFont(context))),
           );
         }).toList(),
       ),
