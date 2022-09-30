@@ -49,3 +49,7 @@
 * Add IRTimePicker
 * Add document
 * Change example and README.md
+
+## 3.0.1
+
+* Resolve some bugs
