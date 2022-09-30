@@ -6,7 +6,7 @@ import 'ir_date_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRDatePickerResponsiveRoute:
+/// [IRDatePickerResponsiveRoute] is a ready responsive route widget that used with [showIRDatePickerRoute] top function.
 
 class IRDatePickerResponsiveRoute extends StatelessWidget {
   final Jalali? initialDate;
@@ -96,7 +96,7 @@ class IRDatePickerResponsiveRoute extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// showIRDatePickerRoute top function:
+/// [showIRDatePickerRoute] show a dialog with [IRDatePickerResponsiveRoute] widget.
 
 Future<Jalali?> showIRDatePickerRoute(BuildContext context, {Jalali? initialDate, int? startYear, int? endYear, bool? enableTodayButton, String? todayButtonText}) async {
   Jalali? jalaliDate = await Navigator.of(context).push<Jalali?>(

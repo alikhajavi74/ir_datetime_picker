@@ -6,7 +6,7 @@ import 'ir_time_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRTimePickerResponsiveDialog:
+/// [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
 
 class IRTimePickerResponsiveDialog extends StatelessWidget {
   const IRTimePickerResponsiveDialog({
@@ -30,7 +30,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
       style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
-      onSelected: (time) {
+      onSelected: (IRTimeModel time) {
         selectedTime = time;
       },
     );
@@ -91,7 +91,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// showIRTimePickerDialog top function:
+/// [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
 
 Future<IRTimeModel?> showIRTimePickerDialog(BuildContext context) async {
   IRTimeModel? time = await showDialog<IRTimeModel?>(

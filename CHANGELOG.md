@@ -43,3 +43,9 @@
 ## 2.0.3
 
 * Change example and README.md
+
+## 3.0.0
+
+* Add IRTimePicker
+* Add document
+* Change example and README.md

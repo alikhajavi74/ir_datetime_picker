@@ -6,7 +6,7 @@ import 'ir_date_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRDatePickerResponsiveDialog:
+/// [IRDatePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRDatePickerDialog] top function.
 
 class IRDatePickerResponsiveDialog extends StatelessWidget {
   final Jalali? initialDate;
@@ -107,7 +107,7 @@ class IRDatePickerResponsiveDialog extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// showIRDatePickerDialog top function:
+/// [showIRDatePickerDialog] show a dialog with [IRDatePickerResponsiveDialog] widget.
 
 Future<Jalali?> showIRDatePickerDialog(BuildContext context, {Jalali? initialDate, int? startYear, int? endYear, bool? enableTodayButton, String? todayButtonText}) async {
   Jalali? jalaliDate = await showDialog<Jalali?>(

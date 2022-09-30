@@ -5,7 +5,32 @@ import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
+/// [IRDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
+
 typedef IRDatePickerOnSelected = void Function(Jalali jalaliDate);
+
+/// You can use [IRDatePicker] to design your own widgets.
+/*
+example:
+```dart
+const Text("use as custom:", style: TextStyle(fontSize: 18.0)),
+Directionality(
+  textDirection: TextDirection.rtl,
+  child: IRDatePicker(
+    startYear: 1380,
+    endYear: 1420,
+    initialDate: Jalali(1400, 6, 12),
+    enableTodayButton: true,
+    todayButtonText: "برو به امروز",
+    onSelected: (Jalali selectedDate) {
+      setState(() {
+        _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+      });
+    },
+  ),
+)
+```
+*/
 
 class IRDatePicker extends StatefulWidget {
   final Jalali? initialDate;

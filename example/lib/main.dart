@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             Text("SelectedTime: $_time", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick time with showIRTimePickerDialog:
+            /// Pick time with IRTimePickerResponsiveDialog:
             ElevatedButton(
               child: const Text("Pick Time"),
               onPressed: () async {

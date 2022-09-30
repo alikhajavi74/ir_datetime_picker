@@ -1,6 +1,6 @@
-# Iranian date & time picker
+# Iranian Date & Time picker
 
-Iranian (persian,farsi,shamsi,jalali) datetime picker with cupertino style and responsive ui.
+Iranian (Persian - Farsi - Shamsi - Jalali) DateTime picker with cupertino style and responsive UI.
 
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
@@ -60,6 +60,7 @@ ElevatedButton(
   },
 )
 
+
 /// You can create your own date picker with IRDatePicker widget:
 const Text("use as custom:", style: TextStyle(fontSize: 18.0)),
 Directionality(
@@ -76,6 +77,20 @@ Directionality(
       });
     },
   ),
+)
+
+
+/// Pick time with IRTimePickerResponsiveDialog:
+ElevatedButton(
+  child: const Text("Pick Time"),
+  onPressed: () async {
+    IRTimeModel? time = await showIRTimePickerDialog(context);
+    if (time != null) {
+      setState(() {
+        _time = time.toString();
+      });
+    }
+  },
 )
 
 ```
