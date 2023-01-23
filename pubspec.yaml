@@ -1,10 +1,10 @@
 name: ir_datetime_picker
 description: Iranian (Persian - Farsi - Shamsi - Jalali) DateTime picker with cupertino style and responsive UI.
-version: 3.0.1
+version: 3.0.2
 repository: https://github.com/alikhajavi74/ir_datetime_picker
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.18.6 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   shamsi_date: ^1.0.1
-  intl: ^0.17.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
