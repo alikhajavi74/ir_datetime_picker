@@ -57,3 +57,7 @@
 ## 3.0.2
 
 * Update project
+
+## 3.0.3
+
+* Optimization & resolve some issues
