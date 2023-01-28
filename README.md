@@ -95,8 +95,7 @@ ElevatedButton(
 
 ```
 
-## ContactMe
-
-Alikhajavi74@gmail.com
+## Support
+If you have any issues or questions, please don't hesitate to reach out to us at Alikhajavi74@gmail.com
 
 https://github.com/alikhajavi74
