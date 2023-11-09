@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ir_datetime_picker/src/helpers/ir_time_helper.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
@@ -14,9 +13,27 @@ typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 
 class IRTimePicker extends StatefulWidget {
   final IRTimePickerOnSelected onSelected;
-  final IRTimeLanguage language;
+  final String nowButtonText;
+  final TextStyle? textStyle;
 
-  const IRTimePicker({super.key, required this.onSelected, required this.language});
+  final double diameterRatio;
+
+  final double magnification;
+
+  final double offAxisFraction;
+
+  final double squeeze;
+
+  const IRTimePicker({
+    super.key,
+    required this.onSelected,
+    required this.nowButtonText,
+    this.textStyle,
+    this.diameterRatio = 1.0,
+    this.magnification = 1.5,
+    this.offAxisFraction = 0.0,
+    this.squeeze = 1.3,
+  });
 
   @override
   State<IRTimePicker> createState() => _IRTimePickerState();
@@ -55,7 +72,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          generateCupertinoPicker(
+          _cupertinoPicker(
             context: context,
             list: _hours,
             initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
@@ -64,8 +81,8 @@ class _IRTimePickerState extends State<IRTimePicker> {
               widget.onSelected(getSelectedIRtime());
             },
           ),
-          Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
-          generateCupertinoPicker(
+          Text(" : ", style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
+          _cupertinoPicker(
             context: context,
             list: _minutes,
             initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
@@ -93,7 +110,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.language == IRTimeLanguage.persian ? "انتخاب اکنون" : "Pick now", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
+                label: Text(widget.nowButtonText, style: widget.textStyle?.copyWith(fontSize: 14.responsiveFont(context))),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -108,34 +125,45 @@ class _IRTimePickerState extends State<IRTimePicker> {
         ),
       ],
     );
-    return Directionality(
-      textDirection: widget.language == IRTimeLanguage.persian ? TextDirection.rtl : TextDirection.ltr,
-      child: Column(
-        children: [
-          cupertinoPickers,
-          nowButton,
-        ],
-      ),
+    return Column(
+      children: [
+        cupertinoPickers,
+        nowButton,
+      ],
     );
   }
 
-  Widget generateCupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     return SizedBox(
       width: 30.0.percentOfWidth(context),
       height: 30.0.percentOfHeight(context),
       child: CupertinoPicker(
         key: _refreshCupertinoPickers ? UniqueKey() : null,
+        backgroundColor: Colors.transparent,
         looping: true,
         scrollController: FixedExtentScrollController(initialItem: initialItem),
         itemExtent: 8.5.percentOfWidth(context),
-        diameterRatio: 1.0,
+        diameterRatio: widget.diameterRatio,
+        magnification: widget.magnification,
+        offAxisFraction: widget.offAxisFraction,
+        squeeze: widget.squeeze,
+        selectionOverlay: Container(),
         onSelectedItemChanged: onSelectedItemChanged,
-        children: list.map<Widget>((element) {
-          return Center(
-            child: Text(element.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
-          );
-        }).toList(),
+        children: list.map<Widget>(
+          (element) {
+            return Center(
+              child: Text(
+                element.toString(),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: widget.textStyle?.color,
+                      fontSize: widget.textStyle?.fontSize ?? 18.0.responsiveFont(context),
+                      fontWeight: widget.textStyle?.fontWeight,
+                    ),
+              ),
+            );
+          },
+        ).toList(),
       ),
     );
   }

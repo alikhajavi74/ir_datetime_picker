@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: const [GlobalCupertinoLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
       supportedLocales: const [Locale("fa"), Locale("en")],
-      locale: const Locale("en"),
+      locale: const Locale("fa"),
       debugShowCheckedModeBanner: false,
       title: 'Example',
       theme: ThemeData(fontFamily: "IranSans"),
@@ -63,20 +63,14 @@ class _HomePageState extends State<HomePage> {
 
             /// Pick time with IRTimePickerResponsiveDialog:
             ElevatedButton(
-              child: const Text("Pick time"),
-              onPressed: () async {
-                IRTimeModel? time = await showIRTimePickerDialog(context: context, language: IRTimeLanguage.english);
-                if (time != null) {
-                  setState(() {
-                    _time = time.toString();
-                  });
-                }
-              },
-            ),
-            ElevatedButton(
               child: const Text("انتخاب زمان"),
               onPressed: () async {
-                IRTimeModel? time = await showIRTimePickerDialog(context: context, language: IRTimeLanguage.persian);
+                IRTimeModel? time = await showIRTimePickerDialog(
+                  context: context,
+                  title: "انتخاب زمان",
+                  nowButtonText: "انتخاب اکنون",
+                  confirmButtonText: "تایید",
+                );
                 if (time != null) {
                   setState(() {
                     _time = time.toString();

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ir_datetime_picker/src/helpers/ir_time_helper.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
 import 'ir_time_model.dart';
@@ -10,11 +9,15 @@ import 'ir_time_picker.dart';
 /// [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
 
 class IRTimePickerResponsiveDialog extends StatelessWidget {
-  final IRTimeLanguage language;
+  final String title;
+  final String nowButtonText;
+  final String confirmButtonText;
 
   const IRTimePickerResponsiveDialog({
     super.key,
-    required this.language,
+    required this.title,
+    required this.nowButtonText,
+    required this.confirmButtonText,
   });
 
   @override
@@ -29,12 +32,12 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
         Navigator.pop(context, null);
       },
     );
-    Widget title = Text(
-      language == IRTimeLanguage.persian ? "انتخاب زمان" : "Pick time",
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
+    Widget titleText = Text(
+      title,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
-      language: language,
+      nowButtonText: nowButtonText,
       onSelected: (IRTimeModel time) {
         selectedTime = time;
       },
@@ -49,7 +52,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
-          language == IRTimeLanguage.persian ? "تایید" : "Confirm",
+          confirmButtonText,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
         ),
         onPressed: () {
@@ -57,36 +60,33 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
         },
       ),
     );
-    return Directionality(
-      textDirection: language == IRTimeLanguage.persian ? TextDirection.rtl : TextDirection.ltr,
-      child: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(
-          width: 90.0.percentOfWidth(context),
-          height: 65.0.percentOfHeight(context),
-        ),
-        child: Material(
-          borderRadius: BorderRadius.circular(15.0),
-          color: Colors.white,
-          elevation: 6.0,
-          shadowColor: Colors.black38,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(width: double.infinity),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: backButton,
-                ),
-                SizedBox(height: 1.5.percentOfHeight(context)),
-                title,
-                SizedBox(height: 1.5.percentOfHeight(context)),
-                timePicker,
-                const Spacer(),
-                submitButton,
-                SizedBox(height: 2.0.percentOfHeight(context)),
-              ],
-            ),
+    return ConstrainedBox(
+      constraints: BoxConstraints.tightFor(
+        width: 90.0.percentOfWidth(context),
+        height: 65.0.percentOfHeight(context),
+      ),
+      child: Material(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+        elevation: 6.0,
+        shadowColor: Colors.black38,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(width: double.infinity),
+              Align(
+                alignment: Alignment.topRight,
+                child: backButton,
+              ),
+              SizedBox(height: 1.5.percentOfHeight(context)),
+              titleText,
+              SizedBox(height: 1.5.percentOfHeight(context)),
+              timePicker,
+              const Spacer(),
+              submitButton,
+              SizedBox(height: 4.0.percentOfHeight(context)),
+            ],
           ),
         ),
       ),
@@ -98,13 +98,17 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 /// [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
 
-Future<IRTimeModel?> showIRTimePickerDialog({required BuildContext context, IRTimeLanguage language = IRTimeLanguage.persian}) async {
+Future<IRTimeModel?> showIRTimePickerDialog({required BuildContext context, String? title, String? nowButtonText, String? confirmButtonText}) async {
   IRTimeModel? time = await showDialog<IRTimeModel?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.4),
       body: Center(
-        child: IRTimePickerResponsiveDialog(language: language),
+        child: IRTimePickerResponsiveDialog(
+          title: title ?? "انتخاب زمان",
+          nowButtonText: nowButtonText ?? "انتخاب اکنون",
+          confirmButtonText: confirmButtonText ?? "تایید",
+        ),
       ),
     ),
   );

@@ -74,8 +74,8 @@ class _IRDatePickerState extends State<IRDatePicker> {
     _selectedYear = _initialDate.year;
     _selectedMonth = _initialDate.month;
     _selectedDay = _initialDate.day;
-    _years = generateYearsList(widget.startYear ?? (_initialDate.year - 50), widget.endYear ?? (_initialDate.year + 50));
-    _days = generateDaysList(getSelectedJalaliDate().monthLength);
+    _years = _yearsList(widget.startYear ?? (_initialDate.year - 50), widget.endYear ?? (_initialDate.year + 50));
+    _days = _daysList(_getSelectedJalaliDate().monthLength);
   }
 
   @override
@@ -86,7 +86,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
     Widget cupertinoPickers = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        generateCupertinoPicker(
+        _cupertinoPicker(
           context: context,
           list: _years,
           initialItem: _years.indexOf(_selectedYear),
@@ -99,10 +99,10 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 _selectedDay = monthLength;
               }
             });
-            widget.onSelected(getSelectedJalaliDate());
+            widget.onSelected(_getSelectedJalaliDate());
           },
         ),
-        generateCupertinoPicker(
+        _cupertinoPicker(
           context: context,
           list: _months,
           initialItem: _months.indexOf(IRJalaliDateHelper.getMonthName(monthNumber: _selectedMonth)),
@@ -115,16 +115,16 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 _selectedDay = monthLength;
               }
             });
-            widget.onSelected(getSelectedJalaliDate());
+            widget.onSelected(_getSelectedJalaliDate());
           },
         ),
-        generateCupertinoPicker(
+        _cupertinoPicker(
           context: context,
           list: _days,
           initialItem: _days.indexOf(_selectedDay),
           onSelectedItemChanged: (selectedIndex) {
             _selectedDay = _days[selectedIndex];
-            widget.onSelected(getSelectedJalaliDate());
+            widget.onSelected(_getSelectedJalaliDate());
           },
         ),
       ],
@@ -154,7 +154,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
                     _selectedMonth = now.month;
                     _selectedDay = now.day;
                   });
-                  widget.onSelected(getSelectedJalaliDate());
+                  widget.onSelected(_getSelectedJalaliDate());
                 },
               ),
             ],
@@ -170,7 +170,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
     );
   }
 
-  Widget generateCupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     return SizedBox(
       width: 30.0.percentOfWidth(context),
@@ -198,7 +198,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
     );
   }
 
-  List<int> generateYearsList(int startYear, int endYear) {
+  List<int> _yearsList(int startYear, int endYear) {
     List<int> years = [];
     for (int i = startYear; i <= endYear; i++) {
       years.add(i);
@@ -206,11 +206,11 @@ class _IRDatePickerState extends State<IRDatePicker> {
     return years;
   }
 
-  List<int> generateDaysList(int monthLength) {
+  List<int> _daysList(int monthLength) {
     return List<int>.generate(monthLength, (index) => index + 1);
   }
 
-  Jalali getSelectedJalaliDate() {
+  Jalali _getSelectedJalaliDate() {
     return Jalali(_selectedYear, _selectedMonth, _selectedDay);
   }
 }
