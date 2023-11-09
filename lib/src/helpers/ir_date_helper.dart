@@ -1,28 +1,15 @@
 import 'package:shamsi_date/shamsi_date.dart';
 
 /// NOTES:
-/// [IRShamsiDateHelper] helpers for working with Shamsi date.
+/// [IRJalaliDateHelper] helpers for working with Jalali date.
 /// [IRGregorianDateHelper] helpers for working with Gregorian date.
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRShamsiDateHelper:
+// IRJalaliDateHelper:
 
-class IRShamsiDateHelper {
-  static List<String> months = [
-    "فروردین",
-    "اردیبهشت",
-    "خرداد",
-    "تیر",
-    "مرداد",
-    "شهریور",
-    "مهر",
-    "آبان",
-    "آذر",
-    "دی",
-    "بهمن",
-    "اسفند"
-  ];
+class IRJalaliDateHelper {
+  static List<String> months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
 
   static String getMonthName({required int monthNumber}) {
     switch (monthNumber) {
@@ -150,20 +137,7 @@ class IRShamsiDateHelper {
 // IRGregorianDateHelper:
 
 class IRGregorianDateHelper {
-  static List<String> months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+  static List<String> months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   static String getMonthName({required int monthNumber}) {
     switch (monthNumber) {

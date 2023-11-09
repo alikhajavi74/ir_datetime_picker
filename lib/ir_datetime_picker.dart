@@ -1,5 +1,7 @@
 /// Export main libraries for development.
 /// You just need to import this library and use all the features of this package.
+library;
+
 export 'package:shamsi_date/shamsi_date.dart';
 
 export 'src/ir_date_picker/ir_date_picker.dart';

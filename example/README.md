@@ -1,6 +1,6 @@
 # example
 
-Example Flutter project.
+Example of IRDateTimePicker package.
 
 ## Getting Started
 

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -37,28 +37,24 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("SelectedDate: $_date",
-                style: const TextStyle(fontSize: 18.0)),
+            Text("SelectedDate: $_date", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             /// Pick date with IRDatePickerResponsiveDialog:
             ElevatedButton(
               child: const Text("Pick Date"),
               onPressed: () async {
-                Jalali? selectedDate = await showIRDatePickerDialog(context,
-                    enableTodayButton: true);
+                Jalali? selectedDate = await showIRDatePickerRoute(context, enableTodayButton: true);
                 if (selectedDate != null) {
                   setState(() {
-                    _date =
-                        "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
             ),
             const SizedBox(height: 30.0),
 
-            Text("SelectedTime: $_time",
-                style: const TextStyle(fontSize: 18.0)),
+            Text("SelectedTime: $_time", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             /// Pick time with IRTimePickerResponsiveDialog:

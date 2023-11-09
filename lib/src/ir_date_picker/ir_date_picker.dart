@@ -41,14 +41,14 @@ class IRDatePicker extends StatefulWidget {
   final IRDatePickerOnSelected onSelected;
 
   const IRDatePicker({
-    Key? key,
+    super.key,
     this.initialDate,
     this.startYear,
     this.endYear,
     this.enableTodayButton,
     this.todayButtonText,
     required this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<IRDatePicker> createState() => _IRDatePickerState();
@@ -63,7 +63,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
   int _selectedDay = 1;
 
   List<int> _years = [];
-  final List<String> _months = IRShamsiDateHelper.months;
+  final List<String> _months = IRJalaliDateHelper.months;
   List<int> _days = [];
 
   @override
@@ -74,8 +74,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
     _selectedYear = _initialDate.year;
     _selectedMonth = _initialDate.month;
     _selectedDay = _initialDate.day;
-    _years = generateYearsList(widget.startYear ?? (_initialDate.year - 50),
-        widget.endYear ?? (_initialDate.year + 50));
+    _years = generateYearsList(widget.startYear ?? (_initialDate.year - 50), widget.endYear ?? (_initialDate.year + 50));
     _days = generateDaysList(getSelectedJalaliDate().monthLength);
   }
 
@@ -94,8 +93,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
           onSelectedItemChanged: (selectedIndex) {
             setState(() {
               _selectedYear = _years[selectedIndex];
-              int monthLength = IRShamsiDateHelper.getMonthLength(
-                  year: _selectedYear, month: _selectedMonth);
+              int monthLength = IRJalaliDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
               _days = List<int>.generate(monthLength, (index) => index + 1);
               if (_selectedDay > monthLength) {
                 _selectedDay = monthLength;
@@ -107,14 +105,11 @@ class _IRDatePickerState extends State<IRDatePicker> {
         generateCupertinoPicker(
           context: context,
           list: _months,
-          initialItem: _months.indexOf(
-              IRShamsiDateHelper.getMonthName(monthNumber: _selectedMonth)),
+          initialItem: _months.indexOf(IRJalaliDateHelper.getMonthName(monthNumber: _selectedMonth)),
           onSelectedItemChanged: (selectedIndex) {
             setState(() {
-              _selectedMonth = IRShamsiDateHelper.getMonthNumber(
-                  monthName: _months[selectedIndex]);
-              int monthLength = IRShamsiDateHelper.getMonthLength(
-                  year: _selectedYear, month: _selectedMonth);
+              _selectedMonth = IRJalaliDateHelper.getMonthNumber(monthName: _months[selectedIndex]);
+              int monthLength = IRJalaliDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
               _days = List<int>.generate(monthLength, (index) => index + 1);
               if (_selectedDay > monthLength) {
                 _selectedDay = monthLength;
@@ -139,8 +134,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
@@ -149,13 +143,9 @@ class _IRDatePickerState extends State<IRDatePicker> {
                 icon: const Icon(Icons.info),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.todayButtonText ?? "انتخاب امروز",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 14.0.responsiveFont(context))),
+                label: Text(widget.todayButtonText ?? "انتخاب امروز", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -175,18 +165,12 @@ class _IRDatePickerState extends State<IRDatePicker> {
     return Column(
       children: [
         cupertinoPickers,
-        (widget.enableTodayButton ?? true)
-            ? todayButton
-            : const SizedBox.shrink(),
+        (widget.enableTodayButton ?? true) ? todayButton : const SizedBox.shrink(),
       ],
     );
   }
 
-  Widget generateCupertinoPicker(
-      {required BuildContext context,
-      required List list,
-      required int initialItem,
-      required ValueChanged<int> onSelectedItemChanged}) {
+  Widget generateCupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     return SizedBox(
       width: 30.0.percentOfWidth(context),
@@ -207,11 +191,7 @@ class _IRDatePickerState extends State<IRDatePicker> {
         onSelectedItemChanged: onSelectedItemChanged,
         children: list.map<Widget>((element) {
           return Center(
-            child: Text(element.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontSize: 18.0.responsiveFont(context))),
+            child: Text(element.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
           );
         }).toList(),
       ),

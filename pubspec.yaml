@@ -1,22 +1,22 @@
 name: ir_datetime_picker
-description: Iranian (Persian - Farsi - Shamsi - Jalali) DateTime picker with cupertino style and responsive UI.
-version: 3.0.3
+description: Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & time picker all with cupertino style and responsive UI.
+version: 4.0.0
 repository: https://github.com/alikhajavi74/ir_datetime_picker
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=3.1.5 <4.0.0'
+  flutter: '>=1.17.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  shamsi_date: ^1.0.1
+  shamsi_date: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
