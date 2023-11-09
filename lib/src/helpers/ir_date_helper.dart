@@ -1,8 +1,14 @@
 import 'package:shamsi_date/shamsi_date.dart';
 
 /// NOTES:
+/// [IRDateType] for selection type of DatePicker and its language.
 /// [IRJalaliDateHelper] helpers for working with Jalali date.
 /// [IRGregorianDateHelper] helpers for working with Gregorian date.
+
+// --------------------------------------------------------------------------------------------------------------------
+
+// IRDateType:
+enum IRDateType { jalali, gregorian }
 
 // --------------------------------------------------------------------------------------------------------------------
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ir_datetime_picker/src/helpers/ir_time_helper.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
@@ -13,8 +14,9 @@ typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 
 class IRTimePicker extends StatefulWidget {
   final IRTimePickerOnSelected onSelected;
+  final IRTimeLanguage language;
 
-  const IRTimePicker({super.key, required this.onSelected});
+  const IRTimePicker({super.key, required this.onSelected, required this.language});
 
   @override
   State<IRTimePicker> createState() => _IRTimePickerState();
@@ -37,7 +39,6 @@ class _IRTimePickerState extends State<IRTimePicker> {
       60,
       (index) => index.toString().padLeft(2, "0"),
     );
-
     _hours = List.generate(
       24,
       (index) => index.toString().padLeft(2, "0"),
@@ -49,29 +50,32 @@ class _IRTimePickerState extends State<IRTimePicker> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshCupertinoPickers = false;
     });
-    Widget cupertinoPickers = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        generateCupertinoPicker(
-          context: context,
-          list: _minutes,
-          initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
-          onSelectedItemChanged: (selectedIndex) {
-            _selectedMinute = int.parse(_minutes[selectedIndex]);
-            widget.onSelected(getSelectedIRtime());
-          },
-        ),
-        Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
-        generateCupertinoPicker(
-          context: context,
-          list: _hours,
-          initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
-          onSelectedItemChanged: (selectedIndex) {
-            _selectedHour = int.parse(_hours[selectedIndex]);
-            widget.onSelected(getSelectedIRtime());
-          },
-        ),
-      ],
+    Widget cupertinoPickers = Directionality(
+      textDirection: TextDirection.ltr,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          generateCupertinoPicker(
+            context: context,
+            list: _hours,
+            initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
+            onSelectedItemChanged: (selectedIndex) {
+              _selectedHour = int.parse(_hours[selectedIndex]);
+              widget.onSelected(getSelectedIRtime());
+            },
+          ),
+          Text(" : ", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
+          generateCupertinoPicker(
+            context: context,
+            list: _minutes,
+            initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
+            onSelectedItemChanged: (selectedIndex) {
+              _selectedMinute = int.parse(_minutes[selectedIndex]);
+              widget.onSelected(getSelectedIRtime());
+            },
+          ),
+        ],
+      ),
     );
     Widget nowButton = Column(
       mainAxisSize: MainAxisSize.min,
@@ -89,7 +93,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text("انتخاب اکنون", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
+                label: Text(widget.language == IRTimeLanguage.persian ? "انتخاب اکنون" : "Pick now", style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).primaryColor, fontSize: 14.0.responsiveFont(context))),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -104,11 +108,14 @@ class _IRTimePickerState extends State<IRTimePicker> {
         ),
       ],
     );
-    return Column(
-      children: [
-        cupertinoPickers,
-        nowButton,
-      ],
+    return Directionality(
+      textDirection: widget.language == IRTimeLanguage.persian ? TextDirection.rtl : TextDirection.ltr,
+      child: Column(
+        children: [
+          cupertinoPickers,
+          nowButton,
+        ],
+      ),
     );
   }
 

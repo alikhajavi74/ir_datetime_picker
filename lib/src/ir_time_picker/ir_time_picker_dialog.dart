@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ir_datetime_picker/src/helpers/ir_time_helper.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 
 import 'ir_time_model.dart';
@@ -9,8 +10,11 @@ import 'ir_time_picker.dart';
 /// [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
 
 class IRTimePickerResponsiveDialog extends StatelessWidget {
+  final IRTimeLanguage language;
+
   const IRTimePickerResponsiveDialog({
     super.key,
+    required this.language,
   });
 
   @override
@@ -26,10 +30,11 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
       },
     );
     Widget title = Text(
-      "انتخاب زمان",
+      language == IRTimeLanguage.persian ? "انتخاب زمان" : "Pick time",
       style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
+      language: language,
       onSelected: (IRTimeModel time) {
         selectedTime = time;
       },
@@ -44,7 +49,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
-          "تایید",
+          language == IRTimeLanguage.persian ? "تایید" : "Confirm",
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
         ),
         onPressed: () {
@@ -53,7 +58,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
       ),
     );
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: language == IRTimeLanguage.persian ? TextDirection.rtl : TextDirection.ltr,
       child: ConstrainedBox(
         constraints: BoxConstraints.tightFor(
           width: 90.0.percentOfWidth(context),
@@ -93,13 +98,13 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 /// [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
 
-Future<IRTimeModel?> showIRTimePickerDialog(BuildContext context) async {
+Future<IRTimeModel?> showIRTimePickerDialog({required BuildContext context, IRTimeLanguage language = IRTimeLanguage.persian}) async {
   IRTimeModel? time = await showDialog<IRTimeModel?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.4),
-      body: const Center(
-        child: IRTimePickerResponsiveDialog(),
+      body: Center(
+        child: IRTimePickerResponsiveDialog(language: language),
       ),
     ),
   );

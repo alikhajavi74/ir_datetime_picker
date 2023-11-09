@@ -4,6 +4,8 @@ library;
 
 export 'package:shamsi_date/shamsi_date.dart';
 
+export 'src/helpers/ir_date_helper.dart';
+export 'src/helpers/ir_time_helper.dart';
 export 'src/ir_date_picker/ir_date_picker.dart';
 export 'src/ir_date_picker/ir_date_picker_dialog.dart';
 export 'src/ir_date_picker/ir_date_picker_route.dart';
