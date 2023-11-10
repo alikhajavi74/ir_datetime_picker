@@ -31,7 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _date = "Null";
+  String _jalaliDate = "Null";
+  String _gregorianDate = "Null";
   String _time = "Null";
 
   @override
@@ -41,27 +42,54 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Picked date: $_date", style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ جلالی: $_jalaliDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick date with IRDatePickerResponsiveDialog:
+            /// Pick Jalali date with showIRJalaliDatePickerDialog top function:
             ElevatedButton(
-              child: const Text("Pick date"),
+              child: const Text("انتخاب تاریخ"),
               onPressed: () async {
-                Jalali? selectedDate = await showIRDatePickerRoute(context, enableTodayButton: true);
+                Jalali? selectedDate = await showIRJalaliDatePickerDialog(
+                  context: context,
+                  title: "انتخاب تاریخ",
+                  todayButtonText: "انتخاب امروز",
+                  confirmButtonText: "تایید",
+                );
                 if (selectedDate != null) {
                   setState(() {
-                    _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _jalaliDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
             ),
             const SizedBox(height: 30.0),
 
-            Text("Picked time: $_time", style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ میلادی: $_gregorianDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick time with IRTimePickerResponsiveDialog:
+            /// Pick Gregorian date with showIRGregorianDatePickerDialog top function:
+            ElevatedButton(
+              child: const Text("انتخاب تاریخ"),
+              onPressed: () async {
+                Gregorian? selectedDate = await showIRGregorianDatePickerDialog(
+                  context: context,
+                  title: "انتخاب تاریخ",
+                  todayButtonText: "انتخاب امروز",
+                  confirmButtonText: "تایید",
+                );
+                if (selectedDate != null) {
+                  setState(() {
+                    _gregorianDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                  });
+                }
+              },
+            ),
+            const SizedBox(height: 30.0),
+
+            Text("زمان: $_time", style: const TextStyle(fontSize: 18.0)),
+            const SizedBox(height: 5.0),
+
+            /// Pick time with showIRTimePickerDialog top function:
             ElevatedButton(
               child: const Text("انتخاب زمان"),
               onPressed: () async {

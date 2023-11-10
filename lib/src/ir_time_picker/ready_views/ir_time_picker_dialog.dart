@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
-
-import 'ir_time_model.dart';
-import 'ir_time_picker.dart';
+import 'package:ir_datetime_picker/src/helpers/time.dart';
+import 'package:ir_datetime_picker/src/ir_time_picker/core/ir_time_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 

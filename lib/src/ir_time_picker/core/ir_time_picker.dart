@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
-
-import 'ir_time_model.dart';
+import 'package:ir_datetime_picker/src/helpers/time.dart';
 
 /// [IRTimePickerOnSelected] is a callback function that will call when user change cupertino pickers.
 
@@ -15,13 +14,9 @@ class IRTimePicker extends StatefulWidget {
   final IRTimePickerOnSelected onSelected;
   final String nowButtonText;
   final TextStyle? textStyle;
-
   final double diameterRatio;
-
   final double magnification;
-
   final double offAxisFraction;
-
   final double squeeze;
 
   const IRTimePicker({
@@ -78,7 +73,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
             initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
             onSelectedItemChanged: (selectedIndex) {
               _selectedHour = int.parse(_hours[selectedIndex]);
-              widget.onSelected(getSelectedIRtime());
+              widget.onSelected(_getSelectedIRtime());
             },
           ),
           Text(" : ", style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
@@ -88,7 +83,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
             initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
             onSelectedItemChanged: (selectedIndex) {
               _selectedMinute = int.parse(_minutes[selectedIndex]);
-              widget.onSelected(getSelectedIRtime());
+              widget.onSelected(_getSelectedIRtime());
             },
           ),
         ],
@@ -105,19 +100,19 @@ class _IRTimePickerState extends State<IRTimePicker> {
             mainAxisSize: MainAxisSize.max,
             children: [
               TextButton.icon(
-                icon: const Icon(Icons.info),
+                icon: Icon(Icons.info, size: 6.5.percentOfWidth(context), color: widget.textStyle?.color ?? Theme.of(context).textTheme.titleMedium?.color),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.nowButtonText, style: widget.textStyle?.copyWith(fontSize: 14.responsiveFont(context))),
+                label: Text(widget.nowButtonText, style: (widget.textStyle ?? Theme.of(context).textTheme.titleMedium)?.copyWith(fontSize: 14.responsiveFont(context), fontWeight: FontWeight.w600)),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
                     _selectedMinute = DateTime.now().minute;
                     _selectedHour = DateTime.now().hour;
                   });
-                  widget.onSelected(getSelectedIRtime());
+                  widget.onSelected(_getSelectedIRtime());
                 },
               ),
             ],
@@ -168,7 +163,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
     );
   }
 
-  IRTimeModel getSelectedIRtime() {
+  IRTimeModel _getSelectedIRtime() {
     return IRTimeModel(hour: _selectedHour, minute: _selectedMinute);
   }
 }
