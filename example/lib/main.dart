@@ -45,7 +45,8 @@ class _HomePageState extends State<HomePage> {
             Text("تاریخ جلالی: $_jalaliDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick Jalali date with showIRJalaliDatePickerDialog top function:
+            // Simple jalali date picker using top level functions showIRJalaliDatePickerDialog or showIRJalaliDatePickerRoute:
+            // NOTE: For create your own JalaliDatePicker use IRJalaliDatePicker widget.
             ElevatedButton(
               child: const Text("انتخاب تاریخ"),
               onPressed: () async {
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                   title: "انتخاب تاریخ",
                   todayButtonText: "انتخاب امروز",
                   confirmButtonText: "تایید",
+                  initialDate: Jalali(1400, 4, 2),
                 );
                 if (selectedDate != null) {
                   setState(() {
@@ -67,7 +69,8 @@ class _HomePageState extends State<HomePage> {
             Text("تاریخ میلادی: $_gregorianDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick Gregorian date with showIRGregorianDatePickerDialog top function:
+            // Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
+            // NOTE: For create your own GregorianDatePicker use IRGregorianDatePicker widget.
             ElevatedButton(
               child: const Text("انتخاب تاریخ"),
               onPressed: () async {
@@ -76,6 +79,7 @@ class _HomePageState extends State<HomePage> {
                   title: "انتخاب تاریخ",
                   todayButtonText: "انتخاب امروز",
                   confirmButtonText: "تایید",
+                  initialDate: Gregorian(2020, 7, 15),
                 );
                 if (selectedDate != null) {
                   setState(() {
@@ -89,7 +93,8 @@ class _HomePageState extends State<HomePage> {
             Text("زمان: $_time", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
-            /// Pick time with showIRTimePickerDialog top function:
+            // Simple time picker using top level function showIRTimePickerDialog:
+            // NOTE: For create your own TimePicker use IRTimePicker widget.
             ElevatedButton(
               child: const Text("انتخاب زمان"),
               onPressed: () async {
@@ -105,6 +110,21 @@ class _HomePageState extends State<HomePage> {
                   });
                 }
               },
+            ),
+            const SizedBox(height: 30.0),
+
+            // Sample IRJalaliDatePicker widget For create your own JalaliDatePicker.
+            Container(
+              color: Colors.green.withOpacity(0.1),
+              child: IRJalaliDatePicker(
+                initialDate: Jalali(1400, 1, 3),
+                minYear: 1390,
+                maxYear: 1420,
+                onSelected: (Jalali date) {
+                  print(date.toString());
+                },
+                todayButtonText: "انتخاب اکنون",
+              ),
             ),
           ],
         ),

@@ -61,3 +61,13 @@
 ## 3.0.3
 
 * Optimization & resolve some issues
+
+## 4.0.0
+
+* Breaking change
+* Add IRGregorianDatePicker
+* Some changes in UI
+* Add some features for customization UI
+* Clean and optimization code
+* Update example
+* Fix responsive bug in Web or Tablet

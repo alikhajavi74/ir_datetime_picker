@@ -1,13 +1,15 @@
-# Iranian Date & Time picker
+# Jalali date picker - Gregorian date picker - Time picker
 
-Iranian (Persian - Farsi - Shamsi - Jalali) DateTime picker with cupertino style and responsive UI.
+Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & time picker all with cupertino style and responsive UI.
 
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
-![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios-brightgreen)
+![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20web-brightgreen)
 
 ## Demo:
-![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/demo.gif)
+![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/screen1.jpg)
+![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/screen2.jpg)
+![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/screen3.jpg)
 
 
 ## Usage
@@ -33,64 +35,80 @@ Step3: check exmaple to use:
 
 ```dart
 
-/// Pick date with IRDatePickerResponsiveDialog:
+// Simple jalali date picker using top level functions showIRJalaliDatePickerDialog or showIRJalaliDatePickerRoute:
+// NOTE: For create your own JalaliDatePicker use IRJalaliDatePicker widget.
 ElevatedButton(
-  child: const Text("pick date with dialog"),
+  child: const Text("انتخاب تاریخ"),
   onPressed: () async {
-    Jalali? selectedDate = await showIRDatePickerDialog(context, enableTodayButton: true);
+    Jalali? selectedDate = await showIRJalaliDatePickerDialog(
+      context: context,
+      title: "انتخاب تاریخ",
+      todayButtonText: "انتخاب امروز",
+      confirmButtonText: "تایید",
+      initialDate: Jalali(1400, 4, 2),
+    );
     if (selectedDate != null) {
       setState(() {
-        _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+        _jalaliDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
       });
     }
   },
 )
 
 
-/// Pick date with IRDatePickerResponsiveRoute:
+// Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
+// NOTE: For create your own GregorianDatePicker use IRGregorianDatePicker widget.
 ElevatedButton(
-  child: const Text("pick date with route"),
+  child: const Text("انتخاب تاریخ"),
   onPressed: () async {
-    Jalali? selectedDate = await showIRDatePickerRoute(context, enableTodayButton: true);
+    Gregorian? selectedDate = await showIRGregorianDatePickerDialog(
+      context: context,
+      title: "انتخاب تاریخ",
+      todayButtonText: "انتخاب امروز",
+      confirmButtonText: "تایید",
+      initialDate: Gregorian(2020, 7, 15),
+    );
     if (selectedDate != null) {
       setState(() {
-        _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+        _gregorianDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
       });
     }
   },
 )
 
 
-/// You can create your own date picker with IRDatePicker widget:
-const Text("use as custom:", style: TextStyle(fontSize: 18.0)),
-Directionality(
-  textDirection: TextDirection.rtl,
-  child: IRDatePicker(
-    startYear: 1380,
-    endYear: 1420,
-    initialDate: Jalali(1400, 6, 12),
-    enableTodayButton: true,
-    todayButtonText: "برو به امروز",
-    onSelected: (Jalali selectedDate) {
-      setState(() {
-        _date = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
-      });
-    },
-  ),
-)
-
-
-/// Pick time with IRTimePickerResponsiveDialog:
+// Simple time picker using top level function showIRTimePickerDialog:
+// NOTE: For create your own TimePicker use IRTimePicker widget.
 ElevatedButton(
-  child: const Text("Pick Time"),
+  child: const Text("انتخاب زمان"),
   onPressed: () async {
-    IRTimeModel? time = await showIRTimePickerDialog(context);
+    IRTimeModel? time = await showIRTimePickerDialog(
+      context: context,
+      title: "انتخاب زمان",
+      nowButtonText: "انتخاب اکنون",
+      confirmButtonText: "تایید",
+    );
     if (time != null) {
       setState(() {
         _time = time.toString();
       });
     }
   },
+)
+
+
+// You can create your own date picker with IRJalaliDatePicker or IRGregorianDatePicker widgets:
+Container(
+  color: Colors.green.withOpacity(0.1),
+  child: IRJalaliDatePicker(
+    initialDate: Jalali(1400, 1, 3),
+    minYear: 1390,
+    maxYear: 1420,
+    onSelected: (Jalali date) {
+      print(date.toString());
+    },
+    todayButtonText: "انتخاب اکنون",
+  ),
 )
 
 ```
