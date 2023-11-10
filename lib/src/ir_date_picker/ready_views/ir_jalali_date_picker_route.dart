@@ -38,7 +38,8 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
     );
     Widget titleText = Text(
       title,
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget datePicker = IRJalaliDatePicker(
       initialDate: initialDate,
@@ -50,17 +51,23 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
       },
     );
     Widget confirmButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.percentOfWidth(context), height: 6.0.percentOfHeight(context)),
+      constraints: BoxConstraints.tightFor(
+          width: 50.0.percentOfWidth(context),
+          height: 6.0.percentOfHeight(context)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: themeData.primaryColor,
           elevation: 6.0,
           shadowColor: Colors.black38,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
           confirmButtonText,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: 14.0.responsiveFont(context),
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         onPressed: () => Navigator.pop<Jalali?>(context, selectedDate),
       ),
@@ -97,7 +104,14 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
 
 /// [showIRJalaliDatePickerRoute] show a dialog with [IRJalaliDatePickerResponsiveRoute] widget.
 
-Future<Jalali?> showIRJalaliDatePickerRoute({required BuildContext context, Jalali? initialDate, int? minYear, int? maxYear, required String title, required String todayButtonText, required String confirmButtonText}) async {
+Future<Jalali?> showIRJalaliDatePickerRoute(
+    {required BuildContext context,
+    Jalali? initialDate,
+    int? minYear,
+    int? maxYear,
+    required String title,
+    required String todayButtonText,
+    required String confirmButtonText}) async {
   Jalali? jalaliDate = await Navigator.of(context).push<Jalali?>(
     MaterialPageRoute(
       builder: (BuildContext buildContext) => IRJalaliDatePickerResponsiveRoute(

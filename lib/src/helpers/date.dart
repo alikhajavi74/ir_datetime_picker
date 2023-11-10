@@ -14,7 +14,20 @@ enum IRDateType { jalali, gregorian }
 // IRJalaliDateHelper:
 
 class IRJalaliDateHelper {
-  static List<String> months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+  static List<String> months = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند"
+  ];
 
   static String getMonthName({required int monthNumber}) {
     switch (monthNumber) {
@@ -142,7 +155,20 @@ class IRJalaliDateHelper {
 // IRGregorianDateHelper:
 
 class IRGregorianDateHelper {
-  static List<String> months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  static List<String> months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   static String getMonthName({required int monthNumber}) {
     switch (monthNumber) {

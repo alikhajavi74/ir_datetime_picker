@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ir_datetime_picker/ir_datetime_picker.dart';
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [GlobalCupertinoLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
       supportedLocales: const [Locale("fa"), Locale("en")],
       locale: const Locale("fa"),
       debugShowCheckedModeBanner: false,
@@ -42,7 +47,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("تاریخ جلالی: $_jalaliDate", style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ جلالی: $_jalaliDate",
+                style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             // Simple jalali date picker using top level functions showIRJalaliDatePickerDialog or showIRJalaliDatePickerRoute:
@@ -59,14 +65,16 @@ class _HomePageState extends State<HomePage> {
                 );
                 if (selectedDate != null) {
                   setState(() {
-                    _jalaliDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _jalaliDate =
+                        "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
             ),
             const SizedBox(height: 30.0),
 
-            Text("تاریخ میلادی: $_gregorianDate", style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ میلادی: $_gregorianDate",
+                style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             // Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
@@ -83,7 +91,8 @@ class _HomePageState extends State<HomePage> {
                 );
                 if (selectedDate != null) {
                   setState(() {
-                    _gregorianDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _gregorianDate =
+                        "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
@@ -121,7 +130,9 @@ class _HomePageState extends State<HomePage> {
                 minYear: 1390,
                 maxYear: 1420,
                 onSelected: (Jalali date) {
-                  print(date.toString());
+                  if (kDebugMode) {
+                    print(date.toString());
+                  }
                 },
                 todayButtonText: "انتخاب اکنون",
               ),

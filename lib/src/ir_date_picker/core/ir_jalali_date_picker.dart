@@ -59,7 +59,8 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
     _selectedYear = _initialDate.year;
     _selectedMonth = _initialDate.month;
     _selectedDay = _initialDate.day;
-    _years = _yearsList(widget.minYear ?? (_initialDate.year - 50), widget.maxYear ?? (_initialDate.year + 50));
+    _years = _yearsList(widget.minYear ?? (_initialDate.year - 50),
+        widget.maxYear ?? (_initialDate.year + 50));
     _days = _daysList(_getSelectedJalaliDate().monthLength);
   }
 
@@ -80,7 +81,8 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
             onSelectedItemChanged: (selectedIndex) {
               setState(() {
                 _selectedYear = _years[selectedIndex];
-                int monthLength = IRJalaliDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+                int monthLength = IRJalaliDateHelper.getMonthLength(
+                    year: _selectedYear, month: _selectedMonth);
                 _days = List<int>.generate(monthLength, (index) => index + 1);
                 if (_selectedDay > monthLength) {
                   _selectedDay = monthLength;
@@ -92,11 +94,14 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
           _cupertinoPicker(
             context: context,
             list: _months,
-            initialItem: _months.indexOf(IRJalaliDateHelper.getMonthName(monthNumber: _selectedMonth)),
+            initialItem: _months.indexOf(
+                IRJalaliDateHelper.getMonthName(monthNumber: _selectedMonth)),
             onSelectedItemChanged: (selectedIndex) {
               setState(() {
-                _selectedMonth = IRJalaliDateHelper.getMonthNumber(monthName: _months[selectedIndex]);
-                int monthLength = IRJalaliDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+                _selectedMonth = IRJalaliDateHelper.getMonthNumber(
+                    monthName: _months[selectedIndex]);
+                int monthLength = IRJalaliDateHelper.getMonthLength(
+                    year: _selectedYear, month: _selectedMonth);
                 _days = List<int>.generate(monthLength, (index) => index + 1);
                 if (_selectedDay > monthLength) {
                   _selectedDay = monthLength;
@@ -122,18 +127,28 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding:
+              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               TextButton.icon(
-                icon: Icon(Icons.info, size: 6.5.percentOfWidth(context), color: widget.textStyle?.color ?? Theme.of(context).textTheme.titleMedium?.color),
+                icon: Icon(Icons.info,
+                    size: 6.5.percentOfWidth(context),
+                    color: widget.textStyle?.color ??
+                        Theme.of(context).textTheme.titleMedium?.color),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.todayButtonText, style: (widget.textStyle ?? Theme.of(context).textTheme.titleMedium)?.copyWith(fontSize: 14.responsiveFont(context), fontWeight: FontWeight.w600)),
+                label: Text(widget.todayButtonText,
+                    style: (widget.textStyle ??
+                            Theme.of(context).textTheme.titleMedium)
+                        ?.copyWith(
+                            fontSize: 14.responsiveFont(context),
+                            fontWeight: FontWeight.w600)),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -158,7 +173,11 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
     );
   }
 
-  Widget _cupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker(
+      {required BuildContext context,
+      required List list,
+      required int initialItem,
+      required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     return SizedBox(
       width: 30.0.percentOfWidth(context),
@@ -174,8 +193,14 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
         selectionOverlay: Container(
           decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(color: widget.textStyle?.color?.withOpacity(0.35) ?? Colors.grey.shade400, width: 0.5),
-              bottom: BorderSide(color: widget.textStyle?.color?.withOpacity(0.35) ?? Colors.grey.shade400, width: 0.5),
+              top: BorderSide(
+                  color: widget.textStyle?.color?.withOpacity(0.35) ??
+                      Colors.grey.shade400,
+                  width: 0.5),
+              bottom: BorderSide(
+                  color: widget.textStyle?.color?.withOpacity(0.35) ??
+                      Colors.grey.shade400,
+                  width: 0.5),
             ),
           ),
         ),
@@ -187,7 +212,8 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ?? 16.5.responsiveFont(context),
+                      fontSize: widget.textStyle?.fontSize ??
+                          16.5.responsiveFont(context),
                       fontWeight: widget.textStyle?.fontWeight,
                     ),
               ),

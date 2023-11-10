@@ -33,7 +33,8 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
     );
     Widget titleText = Text(
       title,
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
       nowButtonText: nowButtonText,
@@ -42,17 +43,23 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
       },
     );
     Widget submitButton = ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 50.0.percentOfWidth(context), height: 6.0.percentOfHeight(context)),
+      constraints: BoxConstraints.tightFor(
+          width: 50.0.percentOfWidth(context),
+          height: 6.0.percentOfHeight(context)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: themeData.primaryColor,
           elevation: 6.0,
           shadowColor: Colors.black38,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
           confirmButtonText,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.0.responsiveFont(context), fontWeight: FontWeight.w600, color: Colors.white),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: 14.0.responsiveFont(context),
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         onPressed: () {
           Navigator.pop(context, selectedTime);
@@ -97,7 +104,11 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 /// [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
 
-Future<IRTimeModel?> showIRTimePickerDialog({required BuildContext context, String? title, String? nowButtonText, String? confirmButtonText}) async {
+Future<IRTimeModel?> showIRTimePickerDialog(
+    {required BuildContext context,
+    String? title,
+    String? nowButtonText,
+    String? confirmButtonText}) async {
   IRTimeModel? time = await showDialog<IRTimeModel?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
