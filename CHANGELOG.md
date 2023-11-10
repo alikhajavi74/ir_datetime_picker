@@ -74,3 +74,7 @@
 * Update demo screen
 * Update README
 * Fix responsive bug in Web or Tablet
+
+## 4.0.1
+
+* Update README

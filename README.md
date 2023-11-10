@@ -6,8 +6,8 @@ Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & time pic
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20web-brightgreen)
 
-## Demo:
-![Demo](https://github.com/alikhajavi74/ir_datetime_picker/blob/master/demo/screen.png)
+## Banner:
+![IRDateTimePicker Banner](https://github.com/alikhajavi74/ir_datetime_picker/raw/master/banner.png)
 
 
 ## Usage
