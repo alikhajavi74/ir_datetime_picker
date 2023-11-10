@@ -1,12 +1,12 @@
 # Jalali date picker - Gregorian date picker - Time picker
 
-Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & time picker all with cupertino style and responsive UI.
-
+Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & Time picker all with cupertino style and responsive UI.
 
 [![Version](https://img.shields.io/pub/v/ir_datetime_picker?color=007AFF)](https://pub.dev/packages/ir_datetime_picker)
 ![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20web-brightgreen)
 
-## Banner:
+## Banner
+
 ![IRDateTimePicker Banner](https://github.com/alikhajavi74/ir_datetime_picker/raw/master/banner.png)
 
 
@@ -112,6 +112,7 @@ Container(
 ```
 
 ## Support
+
 If you have any issues or questions, please don't hesitate to reach out to us at Alikhajavi74@gmail.com
 
 https://github.com/alikhajavi74

@@ -78,3 +78,7 @@
 ## 4.0.1
 
 * Update README
+
+## 4.0.2
+
+* Update README
