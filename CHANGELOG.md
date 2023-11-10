@@ -69,5 +69,8 @@
 * Some changes in UI
 * Add some features for customization UI
 * Clean and optimization code
+* Update dart and flutter
 * Update example
+* Update demo screen
+* Update README
 * Fix responsive bug in Web or Tablet
