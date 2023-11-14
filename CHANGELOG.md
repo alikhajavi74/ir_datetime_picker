@@ -89,3 +89,7 @@
 * Add constraints for core widgets
 * Update example
 * Update README
+
+## 4.0.4
+
+* Format code
