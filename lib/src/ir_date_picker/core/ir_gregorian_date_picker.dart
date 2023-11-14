@@ -7,8 +7,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 /// [IRGregorianDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
 
-typedef IRGregorianDatePickerOnSelected = void Function(
-    Gregorian gregorianDate);
+typedef IRGregorianDatePickerOnSelected = void Function(Gregorian gregorianDate);
 
 /// You can use [IRGregorianDatePicker] to design your own widgets.
 
@@ -16,7 +15,9 @@ class IRGregorianDatePicker extends StatefulWidget {
   final Gregorian? initialDate;
   final int? minYear;
   final int? maxYear;
+  final bool visibleTodayButton;
   final String todayButtonText;
+  final BoxConstraints? constraints;
   final IRGregorianDatePickerOnSelected onSelected;
   final TextStyle? textStyle;
   final double diameterRatio;
@@ -29,7 +30,9 @@ class IRGregorianDatePicker extends StatefulWidget {
     this.initialDate,
     this.minYear,
     this.maxYear,
+    this.visibleTodayButton = true,
     required this.todayButtonText,
+    this.constraints,
     required this.onSelected,
     this.textStyle,
     this.diameterRatio = 1.0,
@@ -60,8 +63,7 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
     _selectedYear = _initialDate.year;
     _selectedMonth = _initialDate.month;
     _selectedDay = _initialDate.day;
-    _years = _yearsList(widget.minYear ?? (_initialDate.year - 50),
-        widget.maxYear ?? (_initialDate.year + 50));
+    _years = _yearsList(widget.minYear ?? (_initialDate.year - 50), widget.maxYear ?? (_initialDate.year + 50));
     _days = _daysList(_getSelectedGregorianDate().monthLength);
   }
 
@@ -70,57 +72,59 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshCupertinoPickers = false;
     });
+    BoxConstraints cupertinoPickersConstraints = BoxConstraints.loose(
+      Size(100.0.percentOfWidth(context), 30.0.percentOfHeight(context)),
+    );
     Widget cupertinoPickers = Directionality(
       textDirection: TextDirection.ltr,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _cupertinoPicker(
-            context: context,
-            list: _years,
-            initialItem: _years.indexOf(_selectedYear),
-            onSelectedItemChanged: (selectedIndex) {
-              setState(() {
-                _selectedYear = _years[selectedIndex];
-                int monthLength = IRGregorianDateHelper.getMonthLength(
-                    year: _selectedYear, month: _selectedMonth);
-                _days = List<int>.generate(monthLength, (index) => index + 1);
-                if (_selectedDay > monthLength) {
-                  _selectedDay = monthLength;
-                }
-              });
-              widget.onSelected(_getSelectedGregorianDate());
-            },
-          ),
-          _cupertinoPicker(
-            context: context,
-            list: _months,
-            initialItem: _months.indexOf(IRGregorianDateHelper.getMonthName(
-                monthNumber: _selectedMonth)),
-            onSelectedItemChanged: (selectedIndex) {
-              setState(() {
-                _selectedMonth = IRGregorianDateHelper.getMonthNumber(
-                    monthName: _months[selectedIndex]);
-                int monthLength = IRGregorianDateHelper.getMonthLength(
-                    year: _selectedYear, month: _selectedMonth);
-                _days = List<int>.generate(monthLength, (index) => index + 1);
-                if (_selectedDay > monthLength) {
-                  _selectedDay = monthLength;
-                }
-              });
-              widget.onSelected(_getSelectedGregorianDate());
-            },
-          ),
-          _cupertinoPicker(
-            context: context,
-            list: _days,
-            initialItem: _days.indexOf(_selectedDay),
-            onSelectedItemChanged: (selectedIndex) {
-              _selectedDay = _days[selectedIndex];
-              widget.onSelected(_getSelectedGregorianDate());
-            },
-          ),
-        ],
+      child: ConstrainedBox(
+        constraints: widget.constraints ?? cupertinoPickersConstraints,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _cupertinoPicker(
+              context: context,
+              list: _years,
+              initialItem: _years.indexOf(_selectedYear),
+              onSelectedItemChanged: (selectedIndex) {
+                setState(() {
+                  _selectedYear = _years[selectedIndex];
+                  int monthLength = IRGregorianDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+                  _days = List<int>.generate(monthLength, (index) => index + 1);
+                  if (_selectedDay > monthLength) {
+                    _selectedDay = monthLength;
+                  }
+                });
+                widget.onSelected(_getSelectedGregorianDate());
+              },
+            ),
+            _cupertinoPicker(
+              context: context,
+              list: _months,
+              initialItem: _months.indexOf(IRGregorianDateHelper.getMonthName(monthNumber: _selectedMonth)),
+              onSelectedItemChanged: (selectedIndex) {
+                setState(() {
+                  _selectedMonth = IRGregorianDateHelper.getMonthNumber(monthName: _months[selectedIndex]);
+                  int monthLength = IRGregorianDateHelper.getMonthLength(year: _selectedYear, month: _selectedMonth);
+                  _days = List<int>.generate(monthLength, (index) => index + 1);
+                  if (_selectedDay > monthLength) {
+                    _selectedDay = monthLength;
+                  }
+                });
+                widget.onSelected(_getSelectedGregorianDate());
+              },
+            ),
+            _cupertinoPicker(
+              context: context,
+              list: _days,
+              initialItem: _days.indexOf(_selectedDay),
+              onSelectedItemChanged: (selectedIndex) {
+                _selectedDay = _days[selectedIndex];
+                widget.onSelected(_getSelectedGregorianDate());
+              },
+            ),
+          ],
+        ),
       ),
     );
     Widget todayButton = Column(
@@ -128,28 +132,18 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               TextButton.icon(
-                icon: Icon(Icons.info,
-                    size: 6.5.percentOfWidth(context),
-                    color: widget.textStyle?.color ??
-                        Theme.of(context).textTheme.titleMedium?.color),
+                icon: Icon(Icons.info, size: 6.5.percentOfWidth(context), color: widget.textStyle?.color ?? Theme.of(context).textTheme.titleMedium?.color),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.todayButtonText,
-                    style: (widget.textStyle ??
-                            Theme.of(context).textTheme.titleMedium)
-                        ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600)),
+                label: Text(widget.todayButtonText, style: (widget.textStyle ?? Theme.of(context).textTheme.titleMedium)?.copyWith(fontSize: 14.responsiveFont(context), fontWeight: FontWeight.w600)),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -167,22 +161,24 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
       ],
     );
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         cupertinoPickers,
-        todayButton,
+        Visibility(
+          visible: widget.visibleTodayButton,
+          child: todayButton,
+        ),
       ],
     );
   }
 
-  Widget _cupertinoPicker(
-      {required BuildContext context,
-      required List list,
-      required int initialItem,
-      required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
-    return SizedBox(
-      width: 30.0.percentOfWidth(context),
-      height: 30.0.percentOfHeight(context),
+    BoxConstraints cupertinoPickerConstraints = BoxConstraints.loose(
+      Size(30.0.percentOfWidth(context), double.infinity),
+    );
+    return ConstrainedBox(
+      constraints: cupertinoPickerConstraints,
       child: CupertinoPicker(
         key: _refreshCupertinoPickers ? UniqueKey() : null,
         scrollController: FixedExtentScrollController(initialItem: initialItem),
@@ -194,14 +190,8 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
         selectionOverlay: Container(
           decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(
-                  color: widget.textStyle?.color?.withOpacity(0.35) ??
-                      Colors.grey.shade400,
-                  width: 0.5),
-              bottom: BorderSide(
-                  color: widget.textStyle?.color?.withOpacity(0.35) ??
-                      Colors.grey.shade400,
-                  width: 0.5),
+              top: BorderSide(color: widget.textStyle?.color?.withOpacity(0.35) ?? Colors.grey.shade400, width: 0.5),
+              bottom: BorderSide(color: widget.textStyle?.color?.withOpacity(0.35) ?? Colors.grey.shade400, width: 0.5),
             ),
           ),
         ),
@@ -213,8 +203,7 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ??
-                          16.5.responsiveFont(context),
+                      fontSize: widget.textStyle?.fontSize ?? 16.5.responsiveFont(context),
                       fontWeight: widget.textStyle?.fontWeight,
                     ),
               ),

@@ -82,3 +82,10 @@
 ## 4.0.2
 
 * Update README
+
+## 4.0.3
+
+* Add visible/invisible for now/today buttons
+* Add constraints for core widgets
+* Update example
+* Update README

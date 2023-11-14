@@ -1,6 +1,6 @@
 name: ir_datetime_picker
 description: Jalali (Persian - Farsi - Shamsi) date picker & Gregorian date picker & time picker all with cupertino style and responsive UI.
-version: 4.0.2
+version: 4.0.3
 repository: https://github.com/alikhajavi74/ir_datetime_picker
 
 environment:

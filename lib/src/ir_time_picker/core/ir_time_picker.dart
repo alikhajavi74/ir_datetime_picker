@@ -11,8 +11,10 @@ typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 /// You can use [IRTimePicker] to design your own widgets.
 
 class IRTimePicker extends StatefulWidget {
-  final IRTimePickerOnSelected onSelected;
+  final bool visibleNowButton;
   final String nowButtonText;
+  final BoxConstraints? constraints;
+  final IRTimePickerOnSelected onSelected;
   final TextStyle? textStyle;
   final double diameterRatio;
   final double magnification;
@@ -21,8 +23,10 @@ class IRTimePicker extends StatefulWidget {
 
   const IRTimePicker({
     super.key,
-    required this.onSelected,
+    this.visibleNowButton = true,
     required this.nowButtonText,
+    this.constraints,
+    required this.onSelected,
     this.textStyle,
     this.diameterRatio = 1.0,
     this.magnification = 1.5,
@@ -62,38 +66,37 @@ class _IRTimePickerState extends State<IRTimePicker> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshCupertinoPickers = false;
     });
+    BoxConstraints cupertinoPickersConstraints = BoxConstraints.loose(
+      Size(100.0.percentOfWidth(context), 30.0.percentOfHeight(context)),
+    );
     Widget cupertinoPickers = Directionality(
       textDirection: TextDirection.ltr,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _cupertinoPicker(
-            context: context,
-            list: _hours,
-            initialItem:
-                _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
-            onSelectedItemChanged: (selectedIndex) {
-              _selectedHour = int.parse(_hours[selectedIndex]);
-              widget.onSelected(_getSelectedIRtime());
-            },
-          ),
-          Text(" : ",
-              style: widget.textStyle ??
-                  Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(fontSize: 18.0.responsiveFont(context))),
-          _cupertinoPicker(
-            context: context,
-            list: _minutes,
-            initialItem:
-                _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
-            onSelectedItemChanged: (selectedIndex) {
-              _selectedMinute = int.parse(_minutes[selectedIndex]);
-              widget.onSelected(_getSelectedIRtime());
-            },
-          ),
-        ],
+      child: ConstrainedBox(
+        constraints: widget.constraints ?? cupertinoPickersConstraints,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _cupertinoPicker(
+              context: context,
+              list: _hours,
+              initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
+              onSelectedItemChanged: (selectedIndex) {
+                _selectedHour = int.parse(_hours[selectedIndex]);
+                widget.onSelected(_getSelectedIRtime());
+              },
+            ),
+            Text(" : ", style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
+            _cupertinoPicker(
+              context: context,
+              list: _minutes,
+              initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
+              onSelectedItemChanged: (selectedIndex) {
+                _selectedMinute = int.parse(_minutes[selectedIndex]);
+                widget.onSelected(_getSelectedIRtime());
+              },
+            ),
+          ],
+        ),
       ),
     );
     Widget nowButton = Column(
@@ -101,28 +104,18 @@ class _IRTimePickerState extends State<IRTimePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               TextButton.icon(
-                icon: Icon(Icons.info,
-                    size: 6.5.percentOfWidth(context),
-                    color: widget.textStyle?.color ??
-                        Theme.of(context).textTheme.titleMedium?.color),
+                icon: Icon(Icons.info, size: 6.5.percentOfWidth(context), color: widget.textStyle?.color ?? Theme.of(context).textTheme.titleMedium?.color),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.nowButtonText,
-                    style: (widget.textStyle ??
-                            Theme.of(context).textTheme.titleMedium)
-                        ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600)),
+                label: Text(widget.nowButtonText, style: (widget.textStyle ?? Theme.of(context).textTheme.titleMedium)?.copyWith(fontSize: 14.responsiveFont(context), fontWeight: FontWeight.w600)),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -138,22 +131,24 @@ class _IRTimePickerState extends State<IRTimePicker> {
       ],
     );
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         cupertinoPickers,
-        nowButton,
+        Visibility(
+          visible: widget.visibleNowButton,
+          child: nowButton,
+        ),
       ],
     );
   }
 
-  Widget _cupertinoPicker(
-      {required BuildContext context,
-      required List list,
-      required int initialItem,
-      required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker({required BuildContext context, required List list, required int initialItem, required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
-    return SizedBox(
-      width: 30.0.percentOfWidth(context),
-      height: 30.0.percentOfHeight(context),
+    BoxConstraints cupertinoPickerConstraints = BoxConstraints.loose(
+      Size(30.0.percentOfWidth(context), double.infinity),
+    );
+    return ConstrainedBox(
+      constraints: cupertinoPickerConstraints,
       child: CupertinoPicker(
         key: _refreshCupertinoPickers ? UniqueKey() : null,
         backgroundColor: Colors.transparent,
@@ -173,8 +168,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ??
-                          18.0.responsiveFont(context),
+                      fontSize: widget.textStyle?.fontSize ?? 18.0.responsiveFont(context),
                       fontWeight: widget.textStyle?.fontWeight,
                     ),
               ),

@@ -102,10 +102,14 @@ Container(
     initialDate: Jalali(1400, 1, 3),
     minYear: 1390,
     maxYear: 1420,
-    onSelected: (Jalali date) {
-      print(date.toString());
-    },
+    visibleTodayButton: true,
     todayButtonText: "انتخاب اکنون",
+    constraints: const BoxConstraints.tightFor(width: 400, height: 200),
+    onSelected: (Jalali date) {
+      if (kDebugMode) {
+        print(date.toString());
+      }
+    },
   ),
 )
 
