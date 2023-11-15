@@ -8,13 +8,17 @@ import 'package:ir_datetime_picker/src/ir_time_picker/core/ir_time_picker.dart';
 /// [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
 
 class IRTimePickerResponsiveDialog extends StatelessWidget {
+  final IRTimeModel? initialTime;
   final String title;
+  final bool visibleNowButton;
   final String nowButtonText;
   final String confirmButtonText;
 
   const IRTimePickerResponsiveDialog({
     super.key,
+    this.initialTime,
     required this.title,
+    this.visibleNowButton = true,
     required this.nowButtonText,
     required this.confirmButtonText,
   });
@@ -37,6 +41,8 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
           fontSize: 22.0.responsiveFont(context), fontWeight: FontWeight.w700),
     );
     Widget timePicker = IRTimePicker(
+      initialTime: initialTime,
+      visibleNowButton: visibleNowButton,
       nowButtonText: nowButtonText,
       onSelected: (IRTimeModel time) {
         selectedTime = time;
@@ -106,7 +112,9 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 Future<IRTimeModel?> showIRTimePickerDialog(
     {required BuildContext context,
+    IRTimeModel? initialTime,
     String? title,
+    bool visibleNowButton = true,
     String? nowButtonText,
     String? confirmButtonText}) async {
   IRTimeModel? time = await showDialog<IRTimeModel?>(
@@ -115,7 +123,9 @@ Future<IRTimeModel?> showIRTimePickerDialog(
       backgroundColor: Colors.grey.withOpacity(0.4),
       body: Center(
         child: IRTimePickerResponsiveDialog(
+          initialTime: initialTime,
           title: title ?? "انتخاب زمان",
+          visibleNowButton: visibleNowButton,
           nowButtonText: nowButtonText ?? "انتخاب اکنون",
           confirmButtonText: confirmButtonText ?? "تایید",
         ),

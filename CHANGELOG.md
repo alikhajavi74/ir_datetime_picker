@@ -85,7 +85,7 @@
 
 ## 4.0.3
 
-* Add visible/invisible for now/today buttons
+* Add visible/invisible for now/today buttons in core widgets
 * Add constraints for core widgets
 * Update example
 * Update README
@@ -93,3 +93,10 @@
 ## 4.0.4
 
 * Format code
+
+## 4.0.5
+
+* Add initialTime to IRTimePicker
+* Add visible/invisible for now/today buttons in ready widgets
+* Update example
+* Update README

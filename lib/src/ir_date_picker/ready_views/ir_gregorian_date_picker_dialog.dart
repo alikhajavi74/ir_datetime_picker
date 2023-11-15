@@ -12,6 +12,7 @@ class IRGregorianDatePickerResponsiveDialog extends StatelessWidget {
   final int? minYear;
   final int? maxYear;
   final String title;
+  final bool visibleTodayButton;
   final String todayButtonText;
   final String confirmButtonText;
 
@@ -21,6 +22,7 @@ class IRGregorianDatePickerResponsiveDialog extends StatelessWidget {
     this.minYear,
     this.maxYear,
     required this.title,
+    this.visibleTodayButton = true,
     required this.todayButtonText,
     required this.confirmButtonText,
   });
@@ -45,6 +47,7 @@ class IRGregorianDatePickerResponsiveDialog extends StatelessWidget {
       initialDate: initialDate,
       minYear: minYear,
       maxYear: maxYear,
+      visibleTodayButton: visibleTodayButton,
       todayButtonText: todayButtonText,
       onSelected: (Gregorian gregorianDate) {
         selectedDate = gregorianDate;
@@ -116,6 +119,7 @@ Future<Gregorian?> showIRGregorianDatePickerDialog(
     int? minYear,
     int? maxYear,
     required String title,
+    bool visibleTodayButton = true,
     required String todayButtonText,
     required String confirmButtonText}) async {
   Gregorian? gregorianDate = await showDialog<Gregorian?>(
@@ -128,6 +132,7 @@ Future<Gregorian?> showIRGregorianDatePickerDialog(
           minYear: minYear,
           maxYear: maxYear,
           title: title,
+          visibleTodayButton: visibleTodayButton,
           todayButtonText: todayButtonText,
           confirmButtonText: confirmButtonText,
         ),

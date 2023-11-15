@@ -12,6 +12,7 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
   final int? minYear;
   final int? maxYear;
   final String title;
+  final bool visibleTodayButton;
   final String todayButtonText;
   final String confirmButtonText;
 
@@ -21,6 +22,7 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
     this.minYear,
     this.maxYear,
     required this.title,
+    this.visibleTodayButton = true,
     required this.todayButtonText,
     required this.confirmButtonText,
   });
@@ -45,6 +47,7 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
       initialDate: initialDate,
       minYear: minYear,
       maxYear: maxYear,
+      visibleTodayButton: visibleTodayButton,
       todayButtonText: todayButtonText,
       onSelected: (Jalali jalaliDate) {
         selectedDate = jalaliDate;
@@ -110,6 +113,7 @@ Future<Jalali?> showIRJalaliDatePickerRoute(
     int? minYear,
     int? maxYear,
     required String title,
+    bool visibleTodayButton = true,
     required String todayButtonText,
     required String confirmButtonText}) async {
   Jalali? jalaliDate = await Navigator.of(context).push<Jalali?>(
@@ -119,6 +123,7 @@ Future<Jalali?> showIRJalaliDatePickerRoute(
         minYear: minYear,
         maxYear: maxYear,
         title: title,
+        visibleTodayButton: visibleTodayButton,
         todayButtonText: todayButtonText,
         confirmButtonText: confirmButtonText,
       ),

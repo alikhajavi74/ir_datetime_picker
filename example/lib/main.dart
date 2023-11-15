@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                 Jalali? selectedDate = await showIRJalaliDatePickerDialog(
                   context: context,
                   title: "انتخاب تاریخ",
+                  visibleTodayButton: true,
                   todayButtonText: "انتخاب امروز",
                   confirmButtonText: "تایید",
                   initialDate: Jalali(1400, 4, 2),
@@ -85,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                 Gregorian? selectedDate = await showIRGregorianDatePickerDialog(
                   context: context,
                   title: "انتخاب تاریخ",
+                  visibleTodayButton: true,
                   todayButtonText: "انتخاب امروز",
                   confirmButtonText: "تایید",
                   initialDate: Gregorian(2020, 7, 15),
@@ -109,7 +111,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 IRTimeModel? time = await showIRTimePickerDialog(
                   context: context,
+                  initialTime: IRTimeModel(hour: 18, minute: 59),
                   title: "انتخاب زمان",
+                  visibleNowButton: true,
                   nowButtonText: "انتخاب اکنون",
                   confirmButtonText: "تایید",
                 );

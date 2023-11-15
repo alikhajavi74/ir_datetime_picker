@@ -41,6 +41,7 @@ ElevatedButton(
     Jalali? selectedDate = await showIRJalaliDatePickerDialog(
       context: context,
       title: "انتخاب تاریخ",
+      visibleTodayButton: true,
       todayButtonText: "انتخاب امروز",
       confirmButtonText: "تایید",
       initialDate: Jalali(1400, 4, 2),
@@ -51,7 +52,7 @@ ElevatedButton(
       });
     }
   },
-)
+),
 
 
 // Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
@@ -62,6 +63,7 @@ ElevatedButton(
     Gregorian? selectedDate = await showIRGregorianDatePickerDialog(
       context: context,
       title: "انتخاب تاریخ",
+      visibleTodayButton: true,
       todayButtonText: "انتخاب امروز",
       confirmButtonText: "تایید",
       initialDate: Gregorian(2020, 7, 15),
@@ -72,7 +74,7 @@ ElevatedButton(
       });
     }
   },
-)
+),
 
 
 // Simple time picker using top level function showIRTimePickerDialog:
@@ -82,7 +84,9 @@ ElevatedButton(
   onPressed: () async {
     IRTimeModel? time = await showIRTimePickerDialog(
       context: context,
+      initialTime: IRTimeModel(hour: 18, minute: 59),
       title: "انتخاب زمان",
+      visibleNowButton: true,
       nowButtonText: "انتخاب اکنون",
       confirmButtonText: "تایید",
     );
@@ -92,7 +96,7 @@ ElevatedButton(
       });
     }
   },
-)
+),
 
 
 // You can create your own date picker with IRJalaliDatePicker or IRGregorianDatePicker widgets:
@@ -111,7 +115,7 @@ Container(
       }
     },
   ),
-)
+),
 
 ```
 

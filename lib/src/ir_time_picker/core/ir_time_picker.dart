@@ -11,6 +11,7 @@ typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 /// You can use [IRTimePicker] to design your own widgets.
 
 class IRTimePicker extends StatefulWidget {
+  final IRTimeModel? initialTime;
   final bool visibleNowButton;
   final String nowButtonText;
   final BoxConstraints? constraints;
@@ -23,6 +24,7 @@ class IRTimePicker extends StatefulWidget {
 
   const IRTimePicker({
     super.key,
+    this.initialTime,
     this.visibleNowButton = true,
     required this.nowButtonText,
     this.constraints,
@@ -40,17 +42,17 @@ class IRTimePicker extends StatefulWidget {
 
 class _IRTimePickerState extends State<IRTimePicker> {
   late bool _refreshCupertinoPickers;
-  late List<String> _minutes;
   late List<String> _hours;
-  late int _selectedMinute;
+  late List<String> _minutes;
   late int _selectedHour;
+  late int _selectedMinute;
 
   @override
   void initState() {
     super.initState();
     _refreshCupertinoPickers = false;
-    _selectedMinute = DateTime.now().minute;
-    _selectedHour = DateTime.now().hour;
+    _selectedHour = widget.initialTime?.hour ?? DateTime.now().hour;
+    _selectedMinute = widget.initialTime?.minute ?? DateTime.now().minute;
     _minutes = List.generate(
       60,
       (index) => index.toString().padLeft(2, "0"),
