@@ -4,11 +4,11 @@ import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 import 'package:ir_datetime_picker/src/helpers/time.dart';
 
-/// [IRTimePickerOnSelected] is a callback function that will call when user change cupertino pickers.
+/// * [IRTimePickerOnSelected] is a callback function that will call when user change cupertino pickers.
 
 typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 
-/// You can use [IRTimePicker] to design your own widgets.
+/// * You can use [IRTimePicker] to design your own time pickers.
 
 class IRTimePicker extends StatefulWidget {
   final IRTimeModel? initialTime;

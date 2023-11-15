@@ -5,7 +5,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [IRGregorianDatePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRGregorianDatePickerDialog] top function.
+/// * [IRGregorianDatePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRGregorianDatePickerDialog] top function.
 
 class IRGregorianDatePickerResponsiveDialog extends StatelessWidget {
   final Gregorian? initialDate;
@@ -111,7 +111,7 @@ class IRGregorianDatePickerResponsiveDialog extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [showIRGregorianDatePickerDialog] show a dialog with [IRGregorianDatePickerResponsiveDialog] widget.
+/// * [showIRGregorianDatePickerDialog] show a dialog with [IRGregorianDatePickerResponsiveDialog] widget.
 
 Future<Gregorian?> showIRGregorianDatePickerDialog(
     {required BuildContext context,

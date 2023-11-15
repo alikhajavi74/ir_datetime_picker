@@ -100,3 +100,8 @@
 * Add visible/invisible for now/today buttons in ready widgets
 * Update example
 * Update README
+
+## 4.0.6
+
+* Update documents
+* Make some optimizations

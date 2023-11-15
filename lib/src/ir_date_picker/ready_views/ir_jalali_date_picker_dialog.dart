@@ -5,7 +5,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [IRJalaliDatePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRJalaliDatePickerDialog] top function.
+/// * [IRJalaliDatePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRJalaliDatePickerDialog] top function.
 
 class IRJalaliDatePickerResponsiveDialog extends StatelessWidget {
   final Jalali? initialDate;
@@ -111,7 +111,7 @@ class IRJalaliDatePickerResponsiveDialog extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [showIRJalaliDatePickerDialog] show a dialog with [IRJalaliDatePickerResponsiveDialog] widget.
+/// * [showIRJalaliDatePickerDialog] show a dialog with [IRJalaliDatePickerResponsiveDialog] widget.
 
 Future<Jalali?> showIRJalaliDatePickerDialog(
     {required BuildContext context,

@@ -5,11 +5,11 @@ import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-/// [IRJalaliDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
+/// * [IRJalaliDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
 
 typedef IRJalaliDatePickerOnSelected = void Function(Jalali jalaliDate);
 
-/// You can use [IRJalaliDatePicker] to design your own widgets.
+/// * You can use [IRJalaliDatePicker] to design your own date pickers.
 
 class IRJalaliDatePicker extends StatefulWidget {
   final Jalali? initialDate;

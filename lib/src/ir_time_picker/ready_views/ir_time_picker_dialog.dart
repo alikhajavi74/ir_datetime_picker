@@ -5,7 +5,7 @@ import 'package:ir_datetime_picker/src/ir_time_picker/core/ir_time_picker.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
+/// * [IRTimePickerResponsiveDialog] is a ready responsive dialog widget that used with [showIRTimePickerDialog] top function.
 
 class IRTimePickerResponsiveDialog extends StatelessWidget {
   final IRTimeModel? initialTime;
@@ -108,7 +108,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
+/// * [showIRTimePickerDialog] show a dialog with [IRTimePickerResponsiveDialog] widget.
 
 Future<IRTimeModel?> showIRTimePickerDialog(
     {required BuildContext context,

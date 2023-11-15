@@ -1,17 +1,13 @@
 import 'package:shamsi_date/shamsi_date.dart';
 
-/// [IRDateType] for selection type of DatePicker and its language.
-/// [IRJalaliDateHelper] helpers for working with Jalali date.
-/// [IRGregorianDateHelper] helpers for working with Gregorian date.
-
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRDateType:
+/// * [IRDateType] usefull for selection type of date in your custom datepicker widgets.
 enum IRDateType { jalali, gregorian }
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRJalaliDateHelper:
+/// * [IRJalaliDateHelper] helpers for working with Jalali date.
 
 class IRJalaliDateHelper {
   static List<String> months = [
@@ -152,7 +148,7 @@ class IRJalaliDateHelper {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// IRGregorianDateHelper:
+/// * [IRGregorianDateHelper] helpers for working with Gregorian date.
 
 class IRGregorianDateHelper {
   static List<String> months = [

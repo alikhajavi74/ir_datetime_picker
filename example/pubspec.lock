@@ -94,7 +94,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.5"
+    version: "4.0.6"
   lints:
     dependency: transitive
     description:

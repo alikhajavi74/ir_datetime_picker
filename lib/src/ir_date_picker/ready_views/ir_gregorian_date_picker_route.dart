@@ -5,7 +5,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [IRGregorianDatePickerResponsiveRoute] is a ready responsive route widget that used with [showIRGregorianDatePickerRoute] top function.
+/// * [IRGregorianDatePickerResponsiveRoute] is a ready responsive route widget that used with [showIRGregorianDatePickerRoute] top function.
 
 class IRGregorianDatePickerResponsiveRoute extends StatelessWidget {
   final Gregorian? initialDate;
@@ -105,7 +105,7 @@ class IRGregorianDatePickerResponsiveRoute extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [showIRGregorianDatePickerRoute] show a dialog with [IRGregorianDatePickerResponsiveRoute] widget.
+/// * [showIRGregorianDatePickerRoute] show a dialog with [IRGregorianDatePickerResponsiveRoute] widget.
 
 Future<Gregorian?> showIRGregorianDatePickerRoute(
     {required BuildContext context,

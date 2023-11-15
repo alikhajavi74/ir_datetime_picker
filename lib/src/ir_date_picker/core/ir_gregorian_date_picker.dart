@@ -5,12 +5,12 @@ import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-/// [IRGregorianDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
+/// * [IRGregorianDatePickerOnSelected] is a callback function that will call when user change cupertino pickers.
 
 typedef IRGregorianDatePickerOnSelected = void Function(
     Gregorian gregorianDate);
 
-/// You can use [IRGregorianDatePicker] to design your own widgets.
+/// * You can use [IRGregorianDatePicker] to design your own date pickers.
 
 class IRGregorianDatePicker extends StatefulWidget {
   final Gregorian? initialDate;

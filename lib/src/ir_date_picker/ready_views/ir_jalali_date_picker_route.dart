@@ -5,7 +5,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [IRJalaliDatePickerResponsiveRoute] is a ready responsive route widget that used with [showIRJalaliDatePickerRoute] top function.
+/// * [IRJalaliDatePickerResponsiveRoute] is a ready responsive route widget that used with [showIRJalaliDatePickerRoute] top function.
 
 class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
   final Jalali? initialDate;
@@ -105,7 +105,7 @@ class IRJalaliDatePickerResponsiveRoute extends StatelessWidget {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-/// [showIRJalaliDatePickerRoute] show a dialog with [IRJalaliDatePickerResponsiveRoute] widget.
+/// * [showIRJalaliDatePickerRoute] show a dialog with [IRJalaliDatePickerResponsiveRoute] widget.
 
 Future<Jalali?> showIRJalaliDatePickerRoute(
     {required BuildContext context,
