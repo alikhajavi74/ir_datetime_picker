@@ -105,3 +105,9 @@
 
 * Update documents
 * Make some optimizations
+
+## 4.1.0
+
+* Add seconds picker to IRDateTimePicker
+* Update IRTimeModel
+* Make some optimization

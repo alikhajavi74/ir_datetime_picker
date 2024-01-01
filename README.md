@@ -82,17 +82,20 @@ ElevatedButton(
 ElevatedButton(
   child: const Text("انتخاب زمان"),
   onPressed: () async {
-    IRTimeModel? time = await showIRTimePickerDialog(
+    IRTimeModel? selectedTime = await showIRTimePickerDialog(
       context: context,
-      initialTime: IRTimeModel(hour: 18, minute: 59),
+      initialTime: IRTimeModel(hour: 18, minute: 45, second: 59),
       title: "انتخاب زمان",
       visibleNowButton: true,
       nowButtonText: "انتخاب اکنون",
       confirmButtonText: "تایید",
     );
-    if (time != null) {
+    if (selectedTime != null) {
       setState(() {
-        _time = time.toString();
+        _time = selectedTime.toString();
+        Duration durationTime = selectedTime.toDuration();
+        print('Duration: ${durationTime.toString()}');
+        print('IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString()}');
       });
     }
   },
