@@ -10,6 +10,7 @@ import 'package:ir_datetime_picker/src/ir_time_picker/core/ir_time_picker.dart';
 class IRTimePickerResponsiveDialog extends StatelessWidget {
   final IRTimeModel? initialTime;
   final String title;
+  final bool visibleSecondsPicker;
   final bool visibleNowButton;
   final String nowButtonText;
   final String confirmButtonText;
@@ -18,6 +19,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
     super.key,
     this.initialTime,
     required this.title,
+    this.visibleSecondsPicker = true,
     this.visibleNowButton = true,
     required this.nowButtonText,
     required this.confirmButtonText,
@@ -42,6 +44,7 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
     );
     Widget timePicker = IRTimePicker(
       initialTime: initialTime,
+      visibleSecondsPicker: visibleSecondsPicker,
       visibleNowButton: visibleNowButton,
       nowButtonText: nowButtonText,
       onSelected: (IRTimeModel time) {
@@ -114,6 +117,7 @@ Future<IRTimeModel?> showIRTimePickerDialog(
     {required BuildContext context,
     IRTimeModel? initialTime,
     String? title,
+    bool visibleSecondsPicker = true,
     bool visibleNowButton = true,
     String? nowButtonText,
     String? confirmButtonText}) async {
@@ -125,6 +129,7 @@ Future<IRTimeModel?> showIRTimePickerDialog(
         child: IRTimePickerResponsiveDialog(
           initialTime: initialTime,
           title: title ?? "انتخاب زمان",
+          visibleSecondsPicker: visibleSecondsPicker,
           visibleNowButton: visibleNowButton,
           nowButtonText: nowButtonText ?? "انتخاب اکنون",
           confirmButtonText: confirmButtonText ?? "تایید",

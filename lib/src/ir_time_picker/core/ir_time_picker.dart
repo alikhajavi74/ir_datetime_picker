@@ -12,6 +12,7 @@ typedef IRTimePickerOnSelected = void Function(IRTimeModel time);
 
 class IRTimePicker extends StatefulWidget {
   final IRTimeModel? initialTime;
+  final bool visibleSecondsPicker;
   final bool visibleNowButton;
   final String nowButtonText;
   final BoxConstraints? constraints;
@@ -25,6 +26,7 @@ class IRTimePicker extends StatefulWidget {
   const IRTimePicker({
     super.key,
     this.initialTime,
+    this.visibleSecondsPicker = true,
     this.visibleNowButton = true,
     required this.nowButtonText,
     this.constraints,
@@ -112,21 +114,27 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 widget.onSelected(_getSelectedIRtime());
               },
             ),
-            Text(" : ",
-                style: widget.textStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontSize: 18.0.responsiveFont(context))),
-            _cupertinoPicker(
-              context: context,
-              list: _seconds,
-              initialItem:
-                  _seconds.indexOf(_selectedSecond.toString().padLeft(2, "0")),
-              onSelectedItemChanged: (selectedIndex) {
-                _selectedSecond = int.parse(_seconds[selectedIndex]);
-                widget.onSelected(_getSelectedIRtime());
-              },
+            Visibility(
+              visible: widget.visibleSecondsPicker,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(" : ",
+                      style: widget.textStyle ??
+                          Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontSize: 18.0.responsiveFont(context))),
+                  _cupertinoPicker(
+                    context: context,
+                    list: _seconds,
+                    initialItem: _seconds
+                        .indexOf(_selectedSecond.toString().padLeft(2, "0")),
+                    onSelectedItemChanged: (selectedIndex) {
+                      _selectedSecond = int.parse(_seconds[selectedIndex]);
+                      widget.onSelected(_getSelectedIRtime());
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -194,7 +202,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
       required ValueChanged<int> onSelectedItemChanged}) {
     mPrint(initialItem);
     BoxConstraints cupertinoPickerConstraints = BoxConstraints.loose(
-      Size(17.0.percentOfWidth(context), double.infinity),
+      Size(
+          widget.visibleSecondsPicker
+              ? 17.0.percentOfWidth(context)
+              : 25.0.percentOfWidth(context),
+          double.infinity),
     );
     return ConstrainedBox(
       constraints: cupertinoPickerConstraints,

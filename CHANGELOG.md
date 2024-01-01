@@ -108,10 +108,15 @@
 
 ## 4.1.0
 
-* Add seconds picker to IRDateTimePicker
+* Add seconds picker to IRTimePicker
 * Update IRTimeModel
 * Make some optimization
 
 ## 4.1.1
 
 * Format code
+
+## 4.1.2
+
+* Add visibleSecondsPicker field to IRTimePicker
+* Update README

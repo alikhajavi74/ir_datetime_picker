@@ -86,6 +86,7 @@ ElevatedButton(
       context: context,
       initialTime: IRTimeModel(hour: 18, minute: 45, second: 59),
       title: "انتخاب زمان",
+      visibleSecondsPicker: true,
       visibleNowButton: true,
       nowButtonText: "انتخاب اکنون",
       confirmButtonText: "تایید",
