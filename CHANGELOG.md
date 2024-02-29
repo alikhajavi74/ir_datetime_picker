@@ -120,3 +120,9 @@
 
 * Add visibleSecondsPicker field to IRTimePicker
 * Update README
+
+## 4.1.3
+
+* Update dart and flutter
+* Add constructor IRTimeModel.fromString() for IRTimeModel
+* Add withoutSecond to toString() for IRTimeModel objects
