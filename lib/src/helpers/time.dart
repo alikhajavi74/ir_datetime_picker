@@ -24,9 +24,13 @@ class IRTimeModel {
   factory IRTimeModel.fromString(String string) {
     List<String> splitted = string.split(":");
     if (splitted.length == 3) {
-      return IRTimeModel(hour: int.parse(splitted[0]), minute: int.parse(splitted[1]), second: int.parse(splitted[2]));
+      return IRTimeModel(
+          hour: int.parse(splitted[0]),
+          minute: int.parse(splitted[1]),
+          second: int.parse(splitted[2]));
     }
-    return IRTimeModel(hour: int.parse(splitted[0]), minute: int.parse(splitted[1]));
+    return IRTimeModel(
+        hour: int.parse(splitted[0]), minute: int.parse(splitted[1]));
   }
 
   Duration toDuration() {
