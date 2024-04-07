@@ -1,66 +1,62 @@
-## 0.0.1
+## 4.1.4
 
-* Start project.
+* Update dart and flutter
+* Add day to IRTimeModel
+* change withoutSecond to showSecond in toString() for IRTimeModel objects
+* Update example
+* Update README
 
-## 0.0.2
+## 4.1.3
 
-* Change License.
+* Update dart and flutter
+* Add constructor IRTimeModel.fromString() for IRTimeModel
+* Add withoutSecond to toString() for IRTimeModel objects
 
-## 1.0.0
+## 4.1.2
 
-* Add IRDateTimePicker
-* Optimization and resolve some bugs
+* Add visibleSecondsPicker field to IRTimePicker
+* Update README
 
-## 1.0.1
+## 4.1.1
 
-* Update README.md
+* Format code
 
-## 1.0.2
+## 4.1.0
 
-* Update README.md
+* Add seconds picker to IRTimePicker
+* Update IRTimeModel
+* Make some optimization
 
-## 1.1.0
+## 4.0.6
 
-* Add example project
-* Make responsive IRDatePicker
+* Update documents
+* Make some optimizations
 
-## 1.1.1
+## 4.0.5
 
-* Resolve some bugs
+* Add initialTime to IRTimePicker
+* Add visible/invisible for now/today buttons in ready widgets
+* Update example
+* Update README
 
-## 2.0.1
+## 4.0.4
 
-* Add IRDatePickerResponsiveDialog and its utils
-* Change example and README.md
-* Resolve some bugs
+* Format code
 
-## 2.0.2
+## 4.0.3
 
-* Add TodayButton
-* Change example and README.md
-* Resolve some bugs
+* Add visible/invisible for now/today buttons in core widgets
+* Add constraints for core widgets
+* Update example
+* Update README
 
-## 2.0.3
+## 4.0.2
 
-* Change example and README.md
+* Update README
 
-## 3.0.0
+## 4.0.1
 
-* Add IRTimePicker
-* Add document
-* Change example and README.md
-
-## 3.0.1
-
-* Resolve some bugs
-
-## 3.0.2
-
-* Update project
-
-## 3.0.3
-
-* Optimization & resolve some issues
+* Update README
 
 ## 4.0.0
 
@@ -75,54 +71,66 @@
 * Update README
 * Fix responsive bug in Web or Tablet
 
-## 4.0.1
+## 3.0.3
 
-* Update README
+* Optimization & resolve some issues
 
-## 4.0.2
+## 3.0.2
 
-* Update README
+* Update project
 
-## 4.0.3
+## 3.0.1
 
-* Add visible/invisible for now/today buttons in core widgets
-* Add constraints for core widgets
-* Update example
-* Update README
+* Resolve some bugs
 
-## 4.0.4
+## 3.0.0
 
-* Format code
+* Add IRTimePicker
+* Add document
+* Change example and README.md
 
-## 4.0.5
+## 2.0.3
 
-* Add initialTime to IRTimePicker
-* Add visible/invisible for now/today buttons in ready widgets
-* Update example
-* Update README
+* Change example and README.md
 
-## 4.0.6
+## 2.0.2
 
-* Update documents
-* Make some optimizations
+* Add TodayButton
+* Change example and README.md
+* Resolve some bugs
 
-## 4.1.0
+## 2.0.1
 
-* Add seconds picker to IRTimePicker
-* Update IRTimeModel
-* Make some optimization
+* Add IRDatePickerResponsiveDialog and its utils
+* Change example and README.md
+* Resolve some bugs
 
-## 4.1.1
+## 1.1.1
 
-* Format code
+* Resolve some bugs
 
-## 4.1.2
+## 1.1.0
 
-* Add visibleSecondsPicker field to IRTimePicker
-* Update README
+* Add example project
+* Make responsive IRDatePicker
 
-## 4.1.3
+## 1.0.2
 
-* Update dart and flutter
-* Add constructor IRTimeModel.fromString() for IRTimeModel
-* Add withoutSecond to toString() for IRTimeModel objects
+* Update README.md
+
+## 1.0.1
+
+* Update README.md
+
+## 1.0.0
+
+* Add IRDateTimePicker
+* Optimization and resolve some bugs
+
+## 0.0.2
+
+* Change License.
+
+## 0.0.1
+
+* Start project.

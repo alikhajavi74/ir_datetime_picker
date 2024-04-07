@@ -93,10 +93,10 @@ ElevatedButton(
     );
     if (selectedTime != null) {
       setState(() {
-        _time = selectedTime.toString();
+        _time = selectedTime.toString(showSecond: true);
         Duration durationTime = selectedTime.toDuration();
-        print('Duration: ${durationTime.toString()}');
-        print('IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString()}');
+        if (kDebugMode) print('Duration: ${durationTime.toString()}');
+        if (kDebugMode) print('IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString(showSecond: true)}');
       });
     }
   },
@@ -114,9 +114,7 @@ Container(
     todayButtonText: "انتخاب اکنون",
     constraints: const BoxConstraints.tightFor(width: 400, height: 200),
     onSelected: (Jalali date) {
-      if (kDebugMode) {
-        print(date.toString());
-      }
+		if (kDebugMode) print(date.toString());
     },
   ),
 ),
