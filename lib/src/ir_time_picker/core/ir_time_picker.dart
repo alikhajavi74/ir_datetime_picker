@@ -91,24 +91,17 @@ class _IRTimePickerState extends State<IRTimePicker> {
             _cupertinoPicker(
               context: context,
               list: _hours,
-              initialItem:
-                  _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
+              initialItem: _hours.indexOf(_selectedHour.toString().padLeft(2, "0")),
               onSelectedItemChanged: (selectedIndex) {
                 _selectedHour = int.parse(_hours[selectedIndex]);
                 widget.onSelected(_getSelectedIRtime());
               },
             ),
-            Text(" : ",
-                style: widget.textStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontSize: 18.0.responsiveFont(context))),
+            Text(" : ", style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
             _cupertinoPicker(
               context: context,
               list: _minutes,
-              initialItem:
-                  _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
+              initialItem: _minutes.indexOf(_selectedMinute.toString().padLeft(2, "0")),
               onSelectedItemChanged: (selectedIndex) {
                 _selectedMinute = int.parse(_minutes[selectedIndex]);
                 widget.onSelected(_getSelectedIRtime());
@@ -119,15 +112,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(" : ",
-                      style: widget.textStyle ??
-                          Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 18.0.responsiveFont(context))),
+                  Text(" : ", style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.0.responsiveFont(context))),
                   _cupertinoPicker(
                     context: context,
                     list: _seconds,
-                    initialItem: _seconds
-                        .indexOf(_selectedSecond.toString().padLeft(2, "0")),
+                    initialItem: _seconds.indexOf(_selectedSecond.toString().padLeft(2, "0")),
                     onSelectedItemChanged: (selectedIndex) {
                       _selectedSecond = int.parse(_seconds[selectedIndex]);
                       widget.onSelected(_getSelectedIRtime());
@@ -145,28 +134,18 @@ class _IRTimePickerState extends State<IRTimePicker> {
       children: [
         SizedBox(height: 1.0.percentOfHeight(context)),
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.percentOfWidth(context)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               TextButton.icon(
-                icon: Icon(Icons.info,
-                    size: 6.5.percentOfWidth(context),
-                    color: widget.textStyle?.color ??
-                        Theme.of(context).textTheme.titleMedium?.color),
+                icon: Icon(Icons.info, size: 6.5.percentOfWidth(context), color: widget.textStyle?.color ?? Theme.of(context).textTheme.titleMedium?.color),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(2.0.percentOfWidth(context)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                 ),
-                label: Text(widget.nowButtonText,
-                    style: (widget.textStyle ??
-                            Theme.of(context).textTheme.titleMedium)
-                        ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600)),
+                label: Text(widget.nowButtonText, style: (widget.textStyle ?? Theme.of(context).textTheme.titleMedium)?.copyWith(fontSize: 14.responsiveFont(context), fontWeight: FontWeight.w600)),
                 onPressed: () {
                   setState(() {
                     _refreshCupertinoPickers = true;
@@ -195,18 +174,15 @@ class _IRTimePickerState extends State<IRTimePicker> {
     );
   }
 
-  Widget _cupertinoPicker(
-      {required BuildContext context,
-      required List list,
-      required int initialItem,
-      required ValueChanged<int> onSelectedItemChanged}) {
+  Widget _cupertinoPicker({
+    required BuildContext context,
+    required List list,
+    required int initialItem,
+    required ValueChanged<int> onSelectedItemChanged,
+  }) {
     mPrint(initialItem);
     BoxConstraints cupertinoPickerConstraints = BoxConstraints.loose(
-      Size(
-          widget.visibleSecondsPicker
-              ? 17.0.percentOfWidth(context)
-              : 25.0.percentOfWidth(context),
-          double.infinity),
+      Size(widget.visibleSecondsPicker ? 17.0.percentOfWidth(context) : 25.0.percentOfWidth(context), double.infinity),
     );
     return ConstrainedBox(
       constraints: cupertinoPickerConstraints,
@@ -229,8 +205,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ??
-                          18.0.responsiveFont(context),
+                      fontSize: widget.textStyle?.fontSize ?? 18.0.responsiveFont(context),
                       fontWeight: widget.textStyle?.fontWeight,
                     ),
               ),
@@ -242,7 +217,6 @@ class _IRTimePickerState extends State<IRTimePicker> {
   }
 
   IRTimeModel _getSelectedIRtime() {
-    return IRTimeModel(
-        hour: _selectedHour, minute: _selectedMinute, second: _selectedSecond);
+    return IRTimeModel(hour: _selectedHour, minute: _selectedMinute, second: _selectedSecond);
   }
 }
