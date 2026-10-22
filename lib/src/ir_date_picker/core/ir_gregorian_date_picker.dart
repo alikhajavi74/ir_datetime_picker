@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/date.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
@@ -199,44 +200,54 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
     );
     return ConstrainedBox(
       constraints: cupertinoPickerConstraints,
-      child: CupertinoPicker(
-        key: _refreshCupertinoPickers ? UniqueKey() : null,
-        scrollController: FixedExtentScrollController(initialItem: initialItem),
-        itemExtent: 8.5.percentOfWidth(context),
-        diameterRatio: widget.diameterRatio,
-        magnification: widget.magnification,
-        offAxisFraction: widget.offAxisFraction,
-        squeeze: widget.squeeze,
-        selectionOverlay: Container(
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                  color: widget.textStyle?.color ??
-                      Colors.grey.shade400,
-                  width: 0.5),
-              bottom: BorderSide(
-                  color: widget.textStyle?.color ??
-                      Colors.grey.shade400,
-                  width: 0.5),
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.stylus,
+          },
+        ),
+        child: CupertinoPicker(
+          key: _refreshCupertinoPickers ? UniqueKey() : null,
+          scrollController: FixedExtentScrollController(initialItem: initialItem),
+          itemExtent: 8.5.percentOfWidth(context),
+          diameterRatio: widget.diameterRatio,
+          magnification: widget.magnification,
+          offAxisFraction: widget.offAxisFraction,
+          squeeze: widget.squeeze,
+          selectionOverlay: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                    color: widget.textStyle?.color ??
+                        Colors.grey.shade400,
+                    width: 0.5),
+                bottom: BorderSide(
+                    color: widget.textStyle?.color ??
+                        Colors.grey.shade400,
+                    width: 0.5),
+              ),
             ),
           ),
+          onSelectedItemChanged: onSelectedItemChanged,
+          children: list.map<Widget>(
+                (element) {
+              return Center(
+                child: Text(
+                  element.toString(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: widget.textStyle?.color,
+                    fontSize: widget.textStyle?.fontSize ??
+                        16.5.responsiveFont(context),
+                    fontWeight: widget.textStyle?.fontWeight,
+                  ),
+                ),
+              );
+            },
+          ).toList(),
         ),
-        onSelectedItemChanged: onSelectedItemChanged,
-        children: list.map<Widget>(
-          (element) {
-            return Center(
-              child: Text(
-                element.toString(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ??
-                          16.5.responsiveFont(context),
-                      fontWeight: widget.textStyle?.fontWeight,
-                    ),
-              ),
-            );
-          },
-        ).toList(),
       ),
     );
   }

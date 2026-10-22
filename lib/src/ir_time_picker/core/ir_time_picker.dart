@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ir_datetime_picker/src/helpers/print.dart';
 import 'package:ir_datetime_picker/src/helpers/responsive.dart';
@@ -186,32 +187,42 @@ class _IRTimePickerState extends State<IRTimePicker> {
     );
     return ConstrainedBox(
       constraints: cupertinoPickerConstraints,
-      child: CupertinoPicker(
-        key: _refreshCupertinoPickers ? UniqueKey() : null,
-        backgroundColor: Colors.transparent,
-        looping: true,
-        scrollController: FixedExtentScrollController(initialItem: initialItem),
-        itemExtent: 8.5.percentOfWidth(context),
-        diameterRatio: widget.diameterRatio,
-        magnification: widget.magnification,
-        offAxisFraction: widget.offAxisFraction,
-        squeeze: widget.squeeze,
-        selectionOverlay: Container(),
-        onSelectedItemChanged: onSelectedItemChanged,
-        children: list.map<Widget>(
-          (element) {
-            return Center(
-              child: Text(
-                element.toString(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: widget.textStyle?.color,
-                      fontSize: widget.textStyle?.fontSize ?? 18.0.responsiveFont(context),
-                      fontWeight: widget.textStyle?.fontWeight,
-                    ),
-              ),
-            );
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.stylus,
           },
-        ).toList(),
+        ),
+        child: CupertinoPicker(
+          key: _refreshCupertinoPickers ? UniqueKey() : null,
+          backgroundColor: Colors.transparent,
+          looping: true,
+          scrollController: FixedExtentScrollController(initialItem: initialItem),
+          itemExtent: 8.5.percentOfWidth(context),
+          diameterRatio: widget.diameterRatio,
+          magnification: widget.magnification,
+          offAxisFraction: widget.offAxisFraction,
+          squeeze: widget.squeeze,
+          selectionOverlay: Container(),
+          onSelectedItemChanged: onSelectedItemChanged,
+          children: list.map<Widget>(
+                (element) {
+              return Center(
+                child: Text(
+                  element.toString(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: widget.textStyle?.color,
+                    fontSize: widget.textStyle?.fontSize ?? 18.0.responsiveFont(context),
+                    fontWeight: widget.textStyle?.fontWeight,
+                  ),
+                ),
+              );
+            },
+          ).toList(),
+        ),
       ),
     );
   }
