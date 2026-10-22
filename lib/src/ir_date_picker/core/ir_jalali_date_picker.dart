@@ -210,11 +210,11 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
-                  color: widget.textStyle?.color?.withOpacity(0.35) ??
+                  color: widget.textStyle?.color ??
                       Colors.grey.shade400,
                   width: 0.5),
               bottom: BorderSide(
-                  color: widget.textStyle?.color?.withOpacity(0.35) ??
+                  color: widget.textStyle?.color ??
                       Colors.grey.shade400,
                   width: 0.5),
             ),

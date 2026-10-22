@@ -125,7 +125,7 @@ Future<Gregorian?> showIRGregorianDatePickerDialog(
   Gregorian? gregorianDate = await showDialog<Gregorian?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.4),
+      backgroundColor: Colors.grey.shade400,
       body: Center(
         child: IRGregorianDatePickerResponsiveDialog(
           initialDate: initialDate,

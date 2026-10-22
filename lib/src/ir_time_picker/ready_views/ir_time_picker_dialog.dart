@@ -124,7 +124,7 @@ Future<IRTimeModel?> showIRTimePickerDialog(
   IRTimeModel? time = await showDialog<IRTimeModel?>(
     context: context,
     builder: (BuildContext buildContext) => Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.4),
+      backgroundColor: Colors.grey.shade400,
       body: Center(
         child: IRTimePickerResponsiveDialog(
           initialTime: initialTime,
