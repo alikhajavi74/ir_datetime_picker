@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
-      ],
+      localizationsDelegates: const [GlobalCupertinoLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
       supportedLocales: const [Locale("fa"), Locale("en")],
       locale: const Locale("fa"),
       debugShowCheckedModeBanner: false,
@@ -50,8 +46,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("تاریخ جلالی: $_jalaliDate",
-                style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ جلالی: $_jalaliDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             // Simple jalali date picker using top level functions showIRJalaliDatePickerDialog or showIRJalaliDatePickerRoute:
@@ -69,16 +64,14 @@ class _HomePageState extends State<HomePage> {
                 );
                 if (selectedDate != null) {
                   setState(() {
-                    _jalaliDate =
-                        "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _jalaliDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
             ),
             const SizedBox(height: 30.0),
 
-            Text("تاریخ میلادی: $_gregorianDate",
-                style: const TextStyle(fontSize: 18.0)),
+            Text("تاریخ میلادی: $_gregorianDate", style: const TextStyle(fontSize: 18.0)),
             const SizedBox(height: 5.0),
 
             // Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
@@ -96,8 +89,7 @@ class _HomePageState extends State<HomePage> {
                 );
                 if (selectedDate != null) {
                   setState(() {
-                    _gregorianDate =
-                        "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
+                    _gregorianDate = "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}";
                   });
                 }
               },
@@ -125,11 +117,8 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _time = selectedTime.toString(showSecond: true);
                     Duration durationTime = selectedTime.toDuration();
-                    if (kDebugMode)
-                      print('Duration: ${durationTime.toString()}');
-                    if (kDebugMode)
-                      print(
-                          'IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString(showSecond: true)}');
+                    if (kDebugMode) print('Duration: ${durationTime.toString()}');
+                    if (kDebugMode) print('IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString(showSecond: true)}');
                   });
                 }
               },
@@ -138,15 +127,14 @@ class _HomePageState extends State<HomePage> {
 
             // Sample IRJalaliDatePicker widget For create your own JalaliDatePicker.
             Container(
-              color: Colors.green.withOpacity(0.1),
+              color: Colors.green,
               child: IRJalaliDatePicker(
                 initialDate: Jalali(1400, 1, 3),
                 minYear: 1390,
                 maxYear: 1420,
                 visibleTodayButton: true,
                 todayButtonText: "انتخاب اکنون",
-                constraints:
-                    const BoxConstraints.tightFor(width: 400, height: 200),
+                constraints: const BoxConstraints.tightFor(width: 400, height: 200),
                 onSelected: (Jalali date) {
                   if (kDebugMode) print(date.toString());
                 },
