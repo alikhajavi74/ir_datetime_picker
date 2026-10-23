@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 5.0),
 
             // Simple jalali date picker using top level functions showIRJalaliDatePickerDialog or showIRJalaliDatePickerRoute:
-            // NOTE: For create your own JalaliDatePicker use IRJalaliDatePicker widget.
+            // NOTE: for create your own JalaliDatePicker use IRJalaliDatePicker widget.
             ElevatedButton(
               child: const Text("انتخاب تاریخ"),
               onPressed: () async {
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 5.0),
 
             // Simple gregorian date picker using top level functions showIRGregorianDatePickerDialog or showIRGregorianDatePickerRoute:
-            // NOTE: For create your own GregorianDatePicker use IRGregorianDatePicker widget.
+            // NOTE: for create your own GregorianDatePicker use IRGregorianDatePicker widget.
             ElevatedButton(
               child: const Text("انتخاب تاریخ"),
               onPressed: () async {
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 5.0),
 
             // Simple time picker using top level function showIRTimePickerDialog:
-            // NOTE: For create your own TimePicker use IRTimePicker widget.
+            // NOTE: for create your own TimePicker use IRTimePicker widget.
             ElevatedButton(
               child: const Text("انتخاب زمان"),
               onPressed: () async {
@@ -125,16 +125,16 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30.0),
 
-            // Sample IRJalaliDatePicker widget For create your own JalaliDatePicker.
+            // Sample IRJalaliDatePicker widget for create your own JalaliDatePicker:
             Container(
               color: Colors.green,
               child: IRJalaliDatePicker(
                 initialDate: Jalali(1400, 1, 3),
                 minYear: 1390,
-                maxYear: 1420,
+                maxYear: 1430,
                 visibleTodayButton: true,
                 todayButtonText: "انتخاب اکنون",
-                constraints: const BoxConstraints.tightFor(width: 400, height: 200),
+                constraints: BoxConstraints.tightFor(width: double.infinity, height: 300),
                 onSelected: (Jalali date) {
                   if (kDebugMode) print(date.toString());
                 },
