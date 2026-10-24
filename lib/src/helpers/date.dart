@@ -22,7 +22,7 @@ class IRJalaliDateHelper {
     "آذر",
     "دی",
     "بهمن",
-    "اسفند"
+    "اسفند",
   ];
 
   static String getMonthName({required int monthNumber}) {
@@ -96,11 +96,15 @@ class IRJalaliDateHelper {
       case 3:
         return "دوشنبه";
       case 4:
-        return "سه" "\u200c" "شنبه";
+        return "سه"
+            "\u200c"
+            "شنبه";
       case 5:
         return "چهارشنبه";
       case 6:
-        return "پنج" "\u200c" "شنبه";
+        return "پنج"
+            "\u200c"
+            "شنبه";
       case 7:
         return "جمعه";
       default:
@@ -118,7 +122,9 @@ class IRJalaliDateHelper {
         return 3;
       case "دو شنبه":
         return 3;
-      case "سه" "\u200c" "شنبه":
+      case "سه"
+          "\u200c"
+          "شنبه":
         return 4;
       case "سه شنبه":
         return 4;
@@ -126,7 +132,9 @@ class IRJalaliDateHelper {
         return 5;
       case "چهار شنبه":
         return 5;
-      case "پنج" "\u200c" "شنبه":
+      case "پنج"
+          "\u200c"
+          "شنبه":
         return 6;
       case "پنج شنبه":
         return 6;
@@ -163,7 +171,7 @@ class IRGregorianDateHelper {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
 
   static String getMonthName({required int monthNumber}) {

@@ -1,3 +1,10 @@
+## 4.1.5
+
+* Update dart and flutter
+* Resolve scroll with mouse problems in desktop apps
+* Update example
+* Update README
+
 ## 4.1.4
 
 * Update dart and flutter

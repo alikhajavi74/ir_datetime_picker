@@ -105,16 +105,16 @@ ElevatedButton(
 
 // You can create your own date picker with IRJalaliDatePicker or IRGregorianDatePicker widgets:
 Container(
-  color: Colors.green.withOpacity(0.1),
+  color: Colors.green,
   child: IRJalaliDatePicker(
     initialDate: Jalali(1400, 1, 3),
     minYear: 1390,
-    maxYear: 1420,
+    maxYear: 1430,
     visibleTodayButton: true,
     todayButtonText: "انتخاب اکنون",
-    constraints: const BoxConstraints.tightFor(width: 400, height: 200),
+    constraints: BoxConstraints.tightFor(width: double.infinity, height: 300),
     onSelected: (Jalali date) {
-		if (kDebugMode) print(date.toString());
+      if (kDebugMode) print(date.toString());
     },
   ),
 ),

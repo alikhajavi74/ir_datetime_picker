@@ -9,11 +9,14 @@ class IRTimeModel {
   int minute;
   int second;
 
-  IRTimeModel(
-      {this.day = 0, required this.hour, required this.minute, this.second = 0})
-      : assert(0 <= hour && hour <= 23, "hour is not valid"),
-        assert(0 <= minute && minute <= 59, "minute is not valid"),
-        assert(0 <= second && second <= 59, "second is not valid");
+  IRTimeModel({
+    this.day = 0,
+    required this.hour,
+    required this.minute,
+    this.second = 0,
+  }) : assert(0 <= hour && hour <= 23, "hour is not valid"),
+       assert(0 <= minute && minute <= 59, "minute is not valid"),
+       assert(0 <= second && second <= 59, "second is not valid");
 
   factory IRTimeModel.fromDuration(Duration duration) {
     List<String> splitted = duration.toString().split(":");
@@ -22,7 +25,11 @@ class IRTimeModel {
     int second = num.parse(splitted[2]).toInt();
     if (24 <= hour) {
       return IRTimeModel(
-          day: (hour ~/ 24), hour: (hour % 24), minute: minute, second: second);
+        day: (hour ~/ 24),
+        hour: (hour % 24),
+        minute: minute,
+        second: second,
+      );
     }
     return IRTimeModel(hour: hour, minute: minute, second: second);
   }
@@ -32,12 +39,15 @@ class IRTimeModel {
     List<String> splitted = string.split(":");
     if (splitted.length == 3) {
       return IRTimeModel(
-          hour: int.parse(splitted[0]),
-          minute: int.parse(splitted[1]),
-          second: int.parse(splitted[2]));
+        hour: int.parse(splitted[0]),
+        minute: int.parse(splitted[1]),
+        second: int.parse(splitted[2]),
+      );
     }
     return IRTimeModel(
-        hour: int.parse(splitted[0]), minute: int.parse(splitted[1]));
+      hour: int.parse(splitted[0]),
+      minute: int.parse(splitted[1]),
+    );
   }
 
   Duration toDuration() {
@@ -50,7 +60,8 @@ class IRTimeModel {
   String toString({bool showSecond = false}) {
     StringBuffer stringBuffer = StringBuffer();
     stringBuffer.write(
-        "${hour.toString().padLeft(2, "0")}:${minute.toString().padLeft(2, "0")}");
+      "${hour.toString().padLeft(2, "0")}:${minute.toString().padLeft(2, "0")}",
+    );
     if (showSecond) {
       stringBuffer.write(":${second.toString().padLeft(2, "0")}");
     }
