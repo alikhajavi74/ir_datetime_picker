@@ -14,9 +14,9 @@ class IRTimeModel {
     required this.hour,
     required this.minute,
     this.second = 0,
-  }) : assert(0 <= hour && hour <= 23, "hour is not valid"),
-       assert(0 <= minute && minute <= 59, "minute is not valid"),
-       assert(0 <= second && second <= 59, "second is not valid");
+  })  : assert(0 <= hour && hour <= 23, "hour is not valid"),
+        assert(0 <= minute && minute <= 59, "minute is not valid"),
+        assert(0 <= second && second <= 59, "second is not valid");
 
   factory IRTimeModel.fromDuration(Duration duration) {
     List<String> splitted = duration.toString().split(":");

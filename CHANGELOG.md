@@ -1,3 +1,7 @@
+## 4.1.6
+
+* Update pubspec.yaml and compatibility with older versions of Flutter.
+
 ## 4.1.5
 
 * Update dart and flutter

@@ -93,9 +93,10 @@ class _IRTimePickerState extends State<IRTimePicker> {
             ),
             Text(
               " : ",
-              style:
-                  widget.textStyle ??
-                  Theme.of(context).textTheme.titleMedium
+              style: widget.textStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .titleMedium
                       ?.copyWith(fontSize: 18.0.responsiveFont(context)),
             ),
             _cupertinoPicker(
@@ -116,9 +117,10 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 children: [
                   Text(
                     " : ",
-                    style:
-                        widget.textStyle ??
-                        Theme.of(context).textTheme.titleMedium
+                    style: widget.textStyle ??
+                        Theme.of(context)
+                            .textTheme
+                            .titleMedium
                             ?.copyWith(fontSize: 18.0.responsiveFont(context)),
                   ),
                   _cupertinoPicker(
@@ -155,8 +157,7 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 icon: Icon(
                   Icons.info,
                   size: 6.5.percentOfWidth(context),
-                  color:
-                      widget.textStyle?.color ??
+                  color: widget.textStyle?.color ??
                       Theme.of(context).textTheme.titleMedium?.color,
                 ),
                 style: TextButton.styleFrom(
@@ -167,13 +168,12 @@ class _IRTimePickerState extends State<IRTimePicker> {
                 ),
                 label: Text(
                   widget.nowButtonText,
-                  style:
-                      (widget.textStyle ??
-                              Theme.of(context).textTheme.titleMedium)
-                          ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600,
-                          ),
+                  style: (widget.textStyle ??
+                          Theme.of(context).textTheme.titleMedium)
+                      ?.copyWith(
+                    fontSize: 14.responsiveFont(context),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 onPressed: () {
                   setState(() {
@@ -245,12 +245,11 @@ class _IRTimePickerState extends State<IRTimePicker> {
               child: Text(
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: widget.textStyle?.color,
-                  fontSize:
-                      widget.textStyle?.fontSize ??
-                      18.0.responsiveFont(context),
-                  fontWeight: widget.textStyle?.fontWeight,
-                ),
+                      color: widget.textStyle?.color,
+                      fontSize: widget.textStyle?.fontSize ??
+                          18.0.responsiveFont(context),
+                      fontWeight: widget.textStyle?.fontWeight,
+                    ),
               ),
             );
           }).toList(),

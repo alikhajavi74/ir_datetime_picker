@@ -159,8 +159,7 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
                 icon: Icon(
                   Icons.info,
                   size: 6.5.percentOfWidth(context),
-                  color:
-                      widget.textStyle?.color ??
+                  color: widget.textStyle?.color ??
                       Theme.of(context).textTheme.titleMedium?.color,
                 ),
                 style: TextButton.styleFrom(
@@ -171,13 +170,12 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
                 ),
                 label: Text(
                   widget.todayButtonText,
-                  style:
-                      (widget.textStyle ??
-                              Theme.of(context).textTheme.titleMedium)
-                          ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600,
-                          ),
+                  style: (widget.textStyle ??
+                          Theme.of(context).textTheme.titleMedium)
+                      ?.copyWith(
+                    fontSize: 14.responsiveFont(context),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 onPressed: () {
                   setState(() {
@@ -255,12 +253,11 @@ class _IRGregorianDatePickerState extends State<IRGregorianDatePicker> {
               child: Text(
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: widget.textStyle?.color,
-                  fontSize:
-                      widget.textStyle?.fontSize ??
-                      16.5.responsiveFont(context),
-                  fontWeight: widget.textStyle?.fontWeight,
-                ),
+                      color: widget.textStyle?.color,
+                      fontSize: widget.textStyle?.fontSize ??
+                          16.5.responsiveFont(context),
+                      fontWeight: widget.textStyle?.fontWeight,
+                    ),
               ),
             );
           }).toList(),

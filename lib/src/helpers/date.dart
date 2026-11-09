@@ -123,8 +123,8 @@ class IRJalaliDateHelper {
       case "دو شنبه":
         return 3;
       case "سه"
-          "\u200c"
-          "شنبه":
+            "\u200c"
+            "شنبه":
         return 4;
       case "سه شنبه":
         return 4;
@@ -133,8 +133,8 @@ class IRJalaliDateHelper {
       case "چهار شنبه":
         return 5;
       case "پنج"
-          "\u200c"
-          "شنبه":
+            "\u200c"
+            "شنبه":
         return 6;
       case "پنج شنبه":
         return 6;

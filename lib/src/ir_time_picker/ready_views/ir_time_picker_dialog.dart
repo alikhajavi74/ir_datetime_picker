@@ -40,9 +40,9 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
     Widget titleText = Text(
       title,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-        fontSize: 22.0.responsiveFont(context),
-        fontWeight: FontWeight.w700,
-      ),
+            fontSize: 22.0.responsiveFont(context),
+            fontWeight: FontWeight.w700,
+          ),
     );
     Widget timePicker = IRTimePicker(
       initialTime: initialTime,
@@ -70,10 +70,10 @@ class IRTimePickerResponsiveDialog extends StatelessWidget {
         child: Text(
           confirmButtonText,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontSize: 14.0.responsiveFont(context),
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
+                fontSize: 14.0.responsiveFont(context),
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
         ),
         onPressed: () {
           Navigator.pop(context, selectedTime);

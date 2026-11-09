@@ -157,8 +157,7 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
                 icon: Icon(
                   Icons.info,
                   size: 6.5.percentOfWidth(context),
-                  color:
-                      widget.textStyle?.color ??
+                  color: widget.textStyle?.color ??
                       Theme.of(context).textTheme.titleMedium?.color,
                 ),
                 style: TextButton.styleFrom(
@@ -169,13 +168,12 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
                 ),
                 label: Text(
                   widget.todayButtonText,
-                  style:
-                      (widget.textStyle ??
-                              Theme.of(context).textTheme.titleMedium)
-                          ?.copyWith(
-                            fontSize: 14.responsiveFont(context),
-                            fontWeight: FontWeight.w600,
-                          ),
+                  style: (widget.textStyle ??
+                          Theme.of(context).textTheme.titleMedium)
+                      ?.copyWith(
+                    fontSize: 14.responsiveFont(context),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 onPressed: () {
                   setState(() {
@@ -253,12 +251,11 @@ class _IRJalaliDatePickerState extends State<IRJalaliDatePicker> {
               child: Text(
                 element.toString(),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: widget.textStyle?.color,
-                  fontSize:
-                      widget.textStyle?.fontSize ??
-                      16.5.responsiveFont(context),
-                  fontWeight: widget.textStyle?.fontWeight,
-                ),
+                      color: widget.textStyle?.color,
+                      fontSize: widget.textStyle?.fontSize ??
+                          16.5.responsiveFont(context),
+                      fontWeight: widget.textStyle?.fontWeight,
+                    ),
               ),
             );
           }).toList(),

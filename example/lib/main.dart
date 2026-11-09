@@ -129,12 +129,14 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _time = selectedTime.toString(showSecond: true);
                     Duration durationTime = selectedTime.toDuration();
-                    if (kDebugMode)
+                    if (kDebugMode) {
                       print('Duration: ${durationTime.toString()}');
-                    if (kDebugMode)
+                    }
+                    if (kDebugMode) {
                       print(
                         'IRTimeModel: ${IRTimeModel.fromDuration(durationTime).toString(showSecond: true)}',
                       );
+                    }
                   });
                 }
               },
